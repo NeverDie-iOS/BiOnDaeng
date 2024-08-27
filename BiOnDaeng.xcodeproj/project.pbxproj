@@ -11,6 +11,7 @@
 		5403C31C2C7DCB07006F8404 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5403C31B2C7DCB07006F8404 /* Assets.xcassets */; };
 		5403C31F2C7DCB07006F8404 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5403C31E2C7DCB07006F8404 /* Preview Assets.xcassets */; };
 		5475029A2C7DD45B007AB18A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502992C7DD45B007AB18A /* WelcomeView.swift */; };
+		5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		5403C31B2C7DCB07006F8404 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5403C31E2C7DCB07006F8404 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		547502992C7DD45B007AB18A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				5403C3172C7DCB06006F8404 /* BiOnDaengApp.swift */,
 				547502992C7DD45B007AB18A /* WelcomeView.swift */,
 				5403C31B2C7DCB07006F8404 /* Assets.xcassets */,
+				5475029B2C7DD91A007AB18A /* Resources */,
 				5403C31D2C7DCB07006F8404 /* Preview Content */,
 			);
 			path = BiOnDaeng;
@@ -65,6 +68,22 @@
 				5403C31E2C7DCB07006F8404 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5475029B2C7DD91A007AB18A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5475029C2C7DD945007AB18A /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5475029C2C7DD945007AB18A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */,
 				5403C31F2C7DCB07006F8404 /* Preview Assets.xcassets in Resources */,
 				5403C31C2C7DCB07006F8404 /* Assets.xcassets in Resources */,
 			);
