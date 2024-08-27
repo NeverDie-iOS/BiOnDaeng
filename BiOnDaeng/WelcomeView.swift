@@ -9,7 +9,13 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image("Bibi")
+        Text("비온댕에 오신 것을 환영해요!")
+        Text("저는 비가 오면 우산을 챙겨주는 강아지예요.")
+        Text("자, 시작할 준비 되셨나요?")
+        Button(action: { }) {
+            Text("시작하기")
+        }
     }
 }
 
