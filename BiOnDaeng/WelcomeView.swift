@@ -1,10 +1,3 @@
-//
-//  WelcomeView.swift
-//  BiOnDaeng
-//
-//  Created by HyunSoo on 8/27/24.
-//
-
 import SwiftUI
 
 struct WelcomeView: View {
