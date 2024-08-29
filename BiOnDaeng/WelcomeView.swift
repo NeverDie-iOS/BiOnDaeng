@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @State var showSheet = false
+    
     var body: some View {
         Image("Bibi")
             .resizable()
@@ -19,7 +21,9 @@ struct WelcomeView: View {
         
         Spacer().frame(height: 50)
         
-        Button(action: { }) {
+        Button(action: { 
+            showSheet = true
+        }) {
             Text("시작하기")
                 .font(.headline)
                 .foregroundColor(Color(hex: "FFFFFF"))
@@ -27,6 +31,10 @@ struct WelcomeView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color(hex: "4B81C2"))
                 .cornerRadius(10)
+                .sheet(isPresented: $showSheet) {
+                    Text("Work in progress")
+                        .presentationDetents([.medium])
+                }
         }
         .padding(.horizontal, 20)
         
