@@ -56,7 +56,7 @@ struct WelcomeView: View {
                             .frame(width: 150,height: 150)
                             .padding(.top, 20)
                         
-                        Spacer().frame(height: .infinity)
+                        Spacer()
                         
                         HStack(spacing: 21) {
                             Button(action: {
