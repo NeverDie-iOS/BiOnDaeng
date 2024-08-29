@@ -1,6 +1,7 @@
 import SwiftUI
 
 extension Font {
-    static let pretendardSemiBold13: Font = .custom("Pretendard-SemiBold", size: 13)
-    static let pretendardSemiBold18: Font = .custom("Pretendard-SemiBold", size: 18)
+    static func pretendardSemiBold(size: CGFloat) -> Font {
+            return .custom("Pretendard-SemiBold", size: size)
+        }
 }
