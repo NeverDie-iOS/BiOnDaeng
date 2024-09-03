@@ -66,7 +66,7 @@ struct MainThemeView: View {
                         Text("15°")
                             .font(.pretendardMedium(size: 36))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
-                        Text("25° / 12°/흐림")
+                        Text("25° / 12° / 흐림")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 42, y: 11)
