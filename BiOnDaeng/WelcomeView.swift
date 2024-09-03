@@ -93,7 +93,7 @@ struct WelcomeView: View {
                             Spacer()
                             
                         }
-                        .presentationDetents([.height(400)])
+                        .presentationDetents([.height(UIScreen.main.bounds.height / 1.85)])
                     }
             }
             .padding(.horizontal, 20)
