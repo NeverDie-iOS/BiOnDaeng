@@ -115,11 +115,11 @@ struct DetailMainView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             DetailMainView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-                .previewDisplayName("iPhone SE (3rd generation)")
-            DetailMainView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
                 .previewDisplayName("iPhone 15 Pro")
+            DetailMainView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+                .previewDisplayName("iPhone SE (3rd generation)")
         }
     }
 }
