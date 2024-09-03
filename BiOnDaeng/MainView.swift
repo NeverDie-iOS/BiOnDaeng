@@ -67,11 +67,11 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MainView()
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
-                .previewDisplayName("iPhone SE (3rd generation)")
-            MainView()
                 .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
                 .previewDisplayName("iPhone 15 Pro")
+            MainView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+                .previewDisplayName("iPhone SE (3rd generation)")
         }
     }
 }
