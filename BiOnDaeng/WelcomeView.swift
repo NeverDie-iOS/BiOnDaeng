@@ -38,7 +38,6 @@ struct WelcomeView: View {
                             Image(systemName: "alarm.fill")
                                 .resizable()
                                 .frame(width: 27.0, height: 27.0)
-                                .scaledToFill()
                                 .foregroundColor(Color.black)
                                 .padding(.top, 12)
                             
@@ -93,7 +92,7 @@ struct WelcomeView: View {
                             Spacer()
                             
                         }
-                        .presentationDetents([.height(UIScreen.main.bounds.height / 1.85)])
+                        .presentationDetents([.height(400)])
                     }
             }
             .padding(.horizontal, 20)
