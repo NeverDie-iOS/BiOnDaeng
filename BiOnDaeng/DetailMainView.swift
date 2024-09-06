@@ -9,7 +9,7 @@ struct DetailMainView: View {
                     Image("Drop")
                     Text("60%")
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 848)
+                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852)
                 .overlay( RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(hex: "4B81C2")!, lineWidth: 1)
                 )
@@ -18,7 +18,7 @@ struct DetailMainView: View {
                     Image("Drop")
                     Text("40%")
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 848)
+                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852)
                 .overlay( RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(hex: "4B81C2")!, lineWidth: 1)
                 )
@@ -99,7 +99,7 @@ struct DetailMainView: View {
                     }
                 }
             }
-            .frame(width: 313 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 848)
+            .frame(width: 313 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852)
             .background(Color(hex: "4B81C2"))
             .clipShape(RoundedRectangle(cornerRadius: 24))
             .padding(.top, 8)
