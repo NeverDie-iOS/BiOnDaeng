@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct MainView: View {
+    @State var showSheet = false
+    @State private var navigateToLocationSearchView = false
+    @AppStorage("myLocation") var myLocation: String = ""
+    
     var body: some View {
         VStack() {
             Spacer().frame(height: 26)
@@ -8,7 +12,38 @@ struct MainView: View {
             HStack(spacing: 0) {
                 Spacer().frame(width: 21)
                 
-                Text("위치 설정 search bar")
+                HStack() {
+                    Image("Search")
+                        .resizable()
+                        .frame(width: 19, height: 19)
+                        .padding(.vertical, 6)
+                    
+                    NavigationStack {
+                        Button(action: {
+                            showSheet = true
+                        }) {
+                            if myLocation == "" {
+                                Text("지역(구/동)을 설정하세요.")
+                                    .foregroundStyle(Color.black)
+                                    .font(.pretendardMedium(size: 10))
+                            } else {
+                                Text("\(myLocation)")
+                                    .foregroundStyle(Color.black)
+                                    .font(.pretendardMedium(size: 10))
+                            }
+                        }
+                        .fullScreenCover(isPresented: $showSheet) {
+                            LocationSearchView(myLocation: $myLocation)
+                        }
+                    }
+                }
+                .frame(width: 216, height: 31)
+                .background(Color.white)
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(hex: "E0E0E0")!, lineWidth: 1)
+                )
+                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
                 
                 Button(action: {
                     
@@ -19,18 +54,19 @@ struct MainView: View {
                         .scaledToFit()
                 }
                 
+                
                 Spacer()
                 
                 Button(action: {
                     
                 }) {
-                    Image(systemName: "square.and.arrow.up")
+                    Image("Share")
                         .resizable()
                         .foregroundColor(Color.black)
-                        .frame(width: 17, height: 21)
+                        .frame(width: 23, height: 23)
                 }
                 
-                Spacer().frame(width: 9)
+                Spacer().frame(width: 6)
                 
                 Button(action: {
                     
@@ -40,6 +76,7 @@ struct MainView: View {
                         .frame(width: 20, height: 20)
                         .scaledToFit()
                 }
+                
                 Spacer().frame(width: 20)
             }
             
@@ -48,9 +85,8 @@ struct MainView: View {
                 DetailMainView()
             }
             .tabViewStyle(PageTabViewStyle())
-             
-            Spacer()
             
+            Spacer()
         }
     }
 }
@@ -76,10 +112,10 @@ struct MainThemeView: View {
                         .foregroundStyle(Color(hex: "FBFCFE")!)
                         .padding(.leading, 40)
                 }
-                .padding(.top, 20)
-                .padding(.leading, 10),
+                    .padding(.top, 20)
+                    .padding(.leading, 10),
                 alignment: .topLeading
-                )
+            )
     }
 }
 
