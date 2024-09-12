@@ -2,13 +2,16 @@ import SwiftUI
 
 struct LocationSearchView: View {
     @State var searchText: String = ""
-    @State private var locations: [String] = loadCSV()
+    @State private var locations: [String: (String, String)] = loadCSV()
+    @Binding var myLocation: String
+    @Environment(\.presentationMode) var presentationMode
     
     var filteredLocations: [String] {
         if searchText.isEmpty || searchText == " "{
             return []
         } else {
-            return locations.filter { $0.contains(searchText) }
+            return locations.keys.filter { $0.contains(searchText) }.sorted { $0.count < $1.count
+            }
         }
     }
     
@@ -26,9 +29,11 @@ struct LocationSearchView: View {
                 
                 Spacer()
                 
-                Button(action: {}
-                ) {
-                    Image(systemName: "star.fill")
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("취소")
+                        .padding(.trailing, 5)
                 }
             }
             .background(Color.white)
@@ -40,7 +45,9 @@ struct LocationSearchView: View {
             
             List(filteredLocations, id: \.self) { location in
                 Button(action: {
-                    print("\(location)")
+                    presentationMode.wrappedValue.dismiss()
+                    myLocation = location
+                    print("\(locations[location]!)")
                 }) {
                     Text("\(location)")
                 }
@@ -52,6 +59,10 @@ struct LocationSearchView: View {
     }
 }
 
-#Preview {
-    LocationSearchView()
+struct LocationSearchView_Previews: PreviewProvider {
+    @State static var myLocation: String = ""
+
+    static var previews: some View {
+        LocationSearchView(myLocation: $myLocation)
+    }
 }
