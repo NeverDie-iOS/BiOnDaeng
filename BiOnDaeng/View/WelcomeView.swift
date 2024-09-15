@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var showSheet = false
-    @State var selectedTime = Date()
+    @AppStorage("selectedTime") var selectedTime: String = "12:00"
     @State private var navigateToMainView = false
     
     var body: some View {
@@ -55,7 +55,17 @@ struct WelcomeView: View {
                             .font(.pretendardSemiBold(size: 13))
                             .padding(.top, 15)
                         
-                        DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
+                        DatePicker("알람 시간", selection: Binding(
+                                                    get: {
+                                                        let components = selectedTime.split(separator: ":").map { Int($0) ?? 0 }
+                                                        return Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1])) ?? Date()
+                                                    },
+                                                    set: { newDate in
+                                                        let formatter = DateFormatter()
+                                                        formatter.dateFormat = "HH:mm"
+                                                        selectedTime = formatter.string(from: newDate)
+                                                    }
+                                                ), displayedComponents: .hourAndMinute)
                             .datePickerStyle(.wheel)
                             .frame(width: 150, height: 150)
                             .padding(.top, 20)
