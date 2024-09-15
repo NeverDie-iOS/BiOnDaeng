@@ -2,17 +2,17 @@ import SwiftUI
 
 struct MainView: View {
     @State var showSheet = false
-    @State private var navigateToLocationSearchView = false
+    @StateObject private var locationManager = LocationManager()
     @AppStorage("myLocation") var myLocation: String = ""
-    
+
     var body: some View {
-        VStack() {
+        VStack {
             Spacer().frame(height: 26)
             
             HStack(spacing: 0) {
                 Spacer().frame(width: 21)
                 
-                HStack() {
+                HStack {
                     Image("Search")
                         .resizable()
                         .frame(width: 19, height: 19)
@@ -22,7 +22,7 @@ struct MainView: View {
                         Button(action: {
                             showSheet = true
                         }) {
-                            if myLocation == "" {
+                            if myLocation.isEmpty {
                                 Text("지역(구/동)을 설정하세요.")
                                     .foregroundStyle(Color.black)
                                     .font(.pretendardMedium(size: 10))
@@ -46,14 +46,13 @@ struct MainView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
                 
                 Button(action: {
-                    
+                    locationManager.requestCurrentLocation()
                 }) {
                     Image("CurrentLocation")
                         .resizable()
                         .frame(width: 27, height: 27)
                         .scaledToFit()
                 }
-                
                 
                 Spacer()
                 
@@ -80,7 +79,7 @@ struct MainView: View {
                 Spacer().frame(width: 20)
             }
             
-            TabView() {
+            TabView {
                 MainThemeView()
                 DetailMainView()
             }

@@ -19,6 +19,7 @@
 		5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */; };
 		547502A32C7DDB5A007AB18A /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A22C7DDB5A007AB18A /* FontExtension.swift */; };
 		547502A62C7DDC0C007AB18A /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A52C7DDC0C007AB18A /* ColorExtention.swift */; };
+		54FED4FC2C97270400EA8C24 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FED4FB2C97270400EA8C24 /* MainViewModel.swift */; };
 		DCBFFBF4E0DF3B2B373A54F2 /* Pods_BiOnDaeng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE9FE435AC2AE01BCB7B46 /* Pods_BiOnDaeng.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		5475029F2C7DDA54007AB18A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		547502A22C7DDB5A007AB18A /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		547502A52C7DDC0C007AB18A /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
+		54FED4FB2C97270400EA8C24 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8B0ADAF0D05A5EE3CF9B8EB7 /* Pods-BiOnDaeng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiOnDaeng.debug.xcconfig"; path = "Target Support Files/Pods-BiOnDaeng/Pods-BiOnDaeng.debug.xcconfig"; sourceTree = "<group>"; };
 		93B7C2976A7E2D168933A469 /* Pods-BiOnDaeng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiOnDaeng.release.xcconfig"; path = "Target Support Files/Pods-BiOnDaeng/Pods-BiOnDaeng.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +94,7 @@
 				5464658F2C8B1F950046EF7C /* LocationSearchView.swift */,
 				542A41222C8B0869005CCA25 /* SearchBarViewModel.swift */,
 				542948962C80968B00FB3B47 /* MainView.swift */,
+				54FED4FB2C97270400EA8C24 /* MainViewModel.swift */,
 				546611A52C83090100A880E0 /* DetailMainView.swift */,
 				5403C31B2C7DCB07006F8404 /* Assets.xcassets */,
 				5475029B2C7DD91A007AB18A /* Resources */,
@@ -277,6 +280,7 @@
 				5403C3182C7DCB06006F8404 /* BiOnDaengApp.swift in Sources */,
 				542948972C80968B00FB3B47 /* MainView.swift in Sources */,
 				5475029A2C7DD45B007AB18A /* WelcomeView.swift in Sources */,
+				54FED4FC2C97270400EA8C24 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +324,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -383,7 +387,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -415,6 +419,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BiOnDaeng/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +452,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BiOnDaeng/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
