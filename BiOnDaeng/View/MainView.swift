@@ -4,7 +4,6 @@ struct MainView: View {
     @State var showSheet = false
     @StateObject private var locationManager = LocationManager()
     @AppStorage("myLocation") var myLocation: String = ""
-    @AppStorage("selectedTime") var selectedTime: String = "12:00" 
     
     var body: some View {
         VStack {
@@ -48,7 +47,6 @@ struct MainView: View {
                 
                 Button(action: {
                     locationManager.requestCurrentLocation()
-                    print("\(selectedTime)")
                 }) {
                     Image("CurrentLocation")
                         .resizable()
