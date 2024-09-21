@@ -23,8 +23,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("위치 업데이트 실패: \(error.localizedDescription)")
-        myLocation = "위치 업데이트 실패"
+        let status = CLLocationManager().authorizationStatus
+        if status == .denied || status == .restricted {
+            openSettings()
+        }
+    }
+
+    private func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 
     private func reverseGeocodeLocation(location: CLLocation) {
