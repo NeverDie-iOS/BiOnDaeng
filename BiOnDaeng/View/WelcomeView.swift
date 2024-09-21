@@ -57,13 +57,13 @@ struct WelcomeView: View {
                         
                         DatePicker("알람 시간", selection: Binding(
                                                     get: {
-                                                        let components = selectedTime.split(separator: ":").map { Int($0) ?? 0 }
-                                                        return Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1])) ?? Date()
+                                                        let components = selectedTime.split(separator: ":").map { Int($0) }
+                                                        return Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1]))!
                                                     },
-                                                    set: { newDate in
+                                                    set: { newTime in
                                                         let formatter = DateFormatter()
                                                         formatter.dateFormat = "HH:mm"
-                                                        selectedTime = formatter.string(from: newDate)
+                                                        selectedTime = formatter.string(from: newTime)
                                                     }
                                                 ), displayedComponents: .hourAndMinute)
                             .datePickerStyle(.wheel)
