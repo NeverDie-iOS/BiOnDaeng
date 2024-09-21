@@ -2,11 +2,13 @@ import Foundation
 import CoreLocation
 import Combine
 import Alamofire
+import SwiftUI
 
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let locationManager = CLLocationManager()
     @Published var myLocation: String = UserDefaults.standard.string(forKey: "myLocation") ?? ""
-
+    @Published var showAlert = false
+    
     override init() {
         super.init()
         locationManager.delegate = self
@@ -25,11 +27,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         let status = CLLocationManager().authorizationStatus
         if status == .denied || status == .restricted {
-            openSettings()
+            DispatchQueue.main.async {
+                            self.showAlert = true // Alert 표시
+                        }
         }
     }
 
-    private func openSettings() {
+    public func openSettings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }

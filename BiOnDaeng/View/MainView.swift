@@ -52,6 +52,15 @@ struct MainView: View {
                         .resizable()
                         .frame(width: 27, height: 27)
                         .scaledToFit()
+                }.alert(isPresented: $locationManager.showAlert) {
+                    Alert(
+                        title: Text("위치 권한 필요"),
+                        message: Text("위치 권한이 거부되었습니다.\n설정에서 권한을 변경해 주세요!"),
+                        primaryButton: .default(Text("설정으로 이동")) {
+                            locationManager.openSettings()
+                        },
+                        secondaryButton: .cancel(Text("취소"))
+                    )
                 }
                 
                 Spacer()
