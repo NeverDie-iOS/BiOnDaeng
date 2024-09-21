@@ -14,18 +14,16 @@ func loadCSV() -> [String: (x: String, y: String)] {
         
         for row in rows {
             let columns = row.components(separatedBy: ",")
-            if columns.count > 5 { // (4열: x좌표, 5열: y좌표)
-                let region = columns[2] // "시"
-                let district = columns[3] // "구"
-                let neighborhood = columns[4] // "동"
-                let xCoordinate = columns[5] // x좌표
-                let yCoordinate = columns[6] // y좌표
+            if columns.count > 5 { 
+                let region = columns[2]
+                let district = columns[3]
+                let neighborhood = columns[4]
+                let xCoordinate = columns[5]
+                let yCoordinate = columns[6]
                 
-                // "서울특별시 종로구 청운효자동" 형식으로 저장
                 let locationName = "\(region) \(district) \(neighborhood)"
                     .trimmingCharacters(in: .whitespaces)
                 
-                // 딕셔너리에 동네 이름과 좌표 매핑
                 locations[locationName] = (x: xCoordinate, y: yCoordinate)
             }
         }

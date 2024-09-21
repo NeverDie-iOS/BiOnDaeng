@@ -28,7 +28,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         let status = CLLocationManager().authorizationStatus
         if status == .denied || status == .restricted {
             DispatchQueue.main.async {
-                            self.showAlert = true // Alert 표시
+                            self.showAlert = true
                         }
         }
     }
