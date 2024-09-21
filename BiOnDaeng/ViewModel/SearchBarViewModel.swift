@@ -14,10 +14,10 @@ func loadCSV() -> [String: (x: String, y: String)] {
         
         for row in rows {
             let columns = row.components(separatedBy: ",")
-            if columns.count > 5 { // 필요한 열 확인 (4열: x좌표, 5열: y좌표)
-                let region = columns[2] // "서울특별시"
-                let district = columns[3] // "종로구"
-                let neighborhood = columns[4] // "청운효자동"
+            if columns.count > 5 { // (4열: x좌표, 5열: y좌표)
+                let region = columns[2] // "시"
+                let district = columns[3] // "구"
+                let neighborhood = columns[4] // "동"
                 let xCoordinate = columns[5] // x좌표
                 let yCoordinate = columns[6] // y좌표
                 
