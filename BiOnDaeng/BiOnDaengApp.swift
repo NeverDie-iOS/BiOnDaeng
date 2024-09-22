@@ -1,10 +1,15 @@
 import SwiftUI
 import Firebase
 import UserNotifications
-
+import KakaoSDKCommon
+    
 @main
 struct BiOnDaengApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    init() {
+            KakaoSDK.initSDK(appKey: "d5db3d55c891ebc5cf8b961bb5ca0131")
+        }
     
     var body: some Scene {
         WindowGroup {
