@@ -111,11 +111,26 @@ struct DetailMainView: View {
                     
                     .offset(y: 16)
                     
-                    Text("비 온다~~")
+                    Text("5mm")
                         .padding(.leading, 4)
+                        .font(.pretendardExtraLight(size: 30))
+                        .foregroundStyle(Color.white)
+                        .padding(.top, 17)
+                    Text(
+"""
+‘약한비'가 내리고 있습니다.
+1mm 이하의 강수량이라서 일상생활에 큰 지장을 주진 않아요.
+‘이슬비'라고도 이야기하는 가벼운 비에요.
+가볍게 작은 우산을 챙겨도 좋을 거 같네요!
+""")
+                        .padding(.leading, 4)
+                        .font(.pretendardExtraLight(size: 10))
+                        .lineSpacing(12)
+                        .foregroundStyle(Color.white)
                 }
             }
             .padding(.horizontal, 24)
+            .padding(.top, 0)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
          
             Spacer()
