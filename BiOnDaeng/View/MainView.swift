@@ -4,7 +4,7 @@ struct MainView: View {
     @State var showSheet = false
     @State var shareViewVisible = false
     @StateObject private var locationManager = LocationManager()
-    @AppStorage("myLocation") var myLocation: String = ""
+    @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
 
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct MainView: View {
                             Button(action: {
                                 showSheet = true
                             }) {
-                                Text(myLocation.isEmpty ? "지역(구/동)을 설정하세요." : "\(myLocation)")
+                                Text("\(myLocation)")
                                     .foregroundColor(.black)
                                     .font(.pretendardMedium(size: 10))
                             }
@@ -51,7 +51,7 @@ struct MainView: View {
                         .alert(isPresented: $locationManager.showAlert) {
                             Alert(
                                 title: Text("위치 권한 필요"),
-                                message: Text("위치 권한이 거부되었습니다.\n설정에서 권한을 변경해 주세요!"),
+                                message: Text("위치 권한이 거부되었습니다.\n설정에서 권한을 변경해 주세요."),
                                 primaryButton: .default(Text("설정으로 이동")) {
                                     locationManager.openSettings()
                                 },

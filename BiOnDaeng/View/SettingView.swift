@@ -6,9 +6,11 @@ struct SettingView: View {
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @AppStorage("notificationPermission") var notificationPermission: Bool = false
     @AppStorage("bionNotifi") var bionNotifi: Bool = false
-    @State var showSheet = false
+    @State var showAlarmSheet = false
     @State private var tempSelectedTime: Date = Date()
     @State private var showAlarmAlert = false
+    @AppStorage("myLocation") var myLocation: String = "설정"
+    @State var showLocationSheet = false
 
     var body: some View {
         VStack {
@@ -20,14 +22,14 @@ struct SettingView: View {
                 Spacer()
                 
                 Button("\(convertTimeToAMPM(selectedTime: selectedTime))") {
-                    showSheet = true
+                    showAlarmSheet = true
                     let components = selectedTime.split(separator: ":").map { Int($0) ?? 0 }
                     tempSelectedTime = Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1])) ?? Date()
                 }
                 .font(.pretendardMedium(size: 14))
                 .foregroundStyle(Color.black)
                 .padding(.trailing, 12)
-                .sheet(isPresented: $showSheet) {
+                .sheet(isPresented: $showAlarmSheet) {
                     VStack {
                         Image(systemName: "alarm.fill")
                             .resizable()
@@ -54,7 +56,7 @@ struct SettingView: View {
                         
                         HStack(spacing: 21) {
                             Button(action: {
-                                showSheet = false
+                                showLocationSheet = false
                             }) {
                                 Text("취소")
                                     .foregroundStyle(.black)
@@ -67,7 +69,7 @@ struct SettingView: View {
                             )
                             
                             Button(action: {
-                                showSheet = false
+                                showAlarmSheet = false
                                 let formatter = DateFormatter()
                                 formatter.dateFormat = "HH:mm"
                                 selectedTime = formatter.string(from: tempSelectedTime)
@@ -153,9 +155,17 @@ struct SettingView: View {
                 
                 Spacer()
                 
-                Text("광주광역시 북구")
-                    .font(.pretendardMedium(size: 14))
-                    .padding(.trailing, 12)
+                Button(action: {
+                    showLocationSheet = true
+                }) {
+                    Text("\(myLocation)")
+                        .foregroundColor(myLocation == "설정" ? .blue : .black)
+                        .font(.pretendardMedium(size: 14))
+                        .padding()
+                }
+                .fullScreenCover(isPresented: $showLocationSheet) {
+                    LocationSearchView(myLocation: $myLocation)
+                }
             }
             .frame(width: 333 * UIScreen.main.bounds.width / 393, height: 67 * UIScreen.main.bounds.height / 852)
             .background(Color(hex: "FFFCF1"))
