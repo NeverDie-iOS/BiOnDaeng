@@ -1,11 +1,15 @@
 import SwiftUI
+import UserNotifications
 
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
+    @AppStorage("notificationPermission") var notificationPermission: Bool = false
+    @AppStorage("bionNotifi") var bionNotifi: Bool = false
     @State var showSheet = false
     @State private var tempSelectedTime: Date = Date()
-    
+    @State private var showAlarmAlert = false
+
     var body: some View {
         VStack {
             HStack {
@@ -95,10 +99,45 @@ struct SettingView: View {
                 Text("비 알림")
                     .font(.pretendardMedium(size: 14))
                     .padding(.leading, 16)
-                Toggle(isOn: .constant(true)) {
+                
+                Toggle(isOn: Binding(
+                    get: {
+                        bionNotifi
+                    },
+                    set: { newValue in
+                        if newValue {
+                            checkNotificationPermission { isAuthorized in
+                                if isAuthorized {
+                                    notificationPermission = true
+                                    bionNotifi = true
+                                } else {
+                                    showAlarmAlert = true
+                                }
+                            }
+                        } else {
+                            notificationPermission = false
+                            bionNotifi = false
+                        }
+                    }
+                )) {
                     
                 }
                 .padding(.trailing, 12)
+                .alert(isPresented: $showAlarmAlert) {
+                    Alert(
+                        title: Text("알림 설정 필요"),
+                        message: Text("알림을 활성화하려면 알림 설정을 허용해야 합니다."),
+                        primaryButton: .default(Text("확인")) {
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(url)
+                            }
+                        },
+                        secondaryButton: .cancel(Text("취소")) {
+                            notificationPermission = false
+                            bionNotifi = false
+                        }
+                    )
+                }
             }
             .frame(width: 333 * UIScreen.main.bounds.width / 393, height: 67 * UIScreen.main.bounds.height / 852)
             .background(Color(hex: "FFFCF1"))
@@ -126,7 +165,6 @@ struct SettingView: View {
             .padding(.top, 13)
             
             Spacer()
-            
         }
         .navigationTitle("설정")
         .navigationBarBackButtonHidden(true)
@@ -138,6 +176,33 @@ struct SettingView: View {
                 .resizable()
                 .frame(width: 26, height: 25)
         })
+        .onAppear {
+            checkNotificationPermission { isAuthorized in
+                if isAuthorized {
+                    notificationPermission = true
+                } else {
+                    notificationPermission = false
+                }
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { _ in
+                checkNotificationPermission { isAuthorized in
+                    notificationPermission = isAuthorized
+                    bionNotifi = isAuthorized
+                }
+            }
+        }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        }
+    }
+    
+    func checkNotificationPermission(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                completion(settings.authorizationStatus == .authorized)
+            }
+        }
     }
     
     func convertTimeToAMPM(selectedTime: String) -> String {
@@ -147,7 +212,7 @@ struct SettingView: View {
         }
         
         let period = hour < 12 ? "오전" : "오후"
-        let adjustedHour = hour % 12 == 0 ? 12 : hour % 12 // 12시 조정
+        let adjustedHour = hour % 12 == 0 ? 12 : hour % 12
         return String(format: "%@ %02d:%02d", period, adjustedHour, minute)
     }
 }

@@ -2,14 +2,14 @@ import SwiftUI
 import Firebase
 import UserNotifications
 import KakaoSDKCommon
-    
+
 @main
 struct BiOnDaengApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
-            KakaoSDK.initSDK(appKey: "d5db3d55c891ebc5cf8b961bb5ca0131")
-        }
+        KakaoSDK.initSDK(appKey: "d5db3d55c891ebc5cf8b961bb5ca0131")
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -19,6 +19,9 @@ struct BiOnDaengApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+    @AppStorage("notificationPermission") var notificationPermission: Bool = false
+    @AppStorage("bionNotifi") var bionNotifi: Bool = false
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         FirebaseApp.configure()
@@ -33,7 +36,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if let error = error {
                 print("알림 권한 요청 실패: \(error)")
+                return
             }
+            self.notificationPermission = granted
+            self.bionNotifi = granted
         }
         
         center.delegate = self
