@@ -43,7 +43,7 @@ struct DetailMainView: View {
                 .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852
                        , alignment: .topLeading)
                 .background(Color(hex: "006FC2"))
-                .clipShape(RoundedRectangle(cornerRadius: 17))
+                .clipShape(RoundedRectangle(cornerRadius: 27))
                 
                 VStack(alignment: .leading) {
                     HStack {
@@ -70,7 +70,7 @@ struct DetailMainView: View {
                 .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852
                        , alignment: .topLeading)
                 .background(Color(hex: "006FC2"))
-                .clipShape(RoundedRectangle(cornerRadius: 17))
+                .clipShape(RoundedRectangle(cornerRadius: 27))
             }
             
             ZStack(alignment: .top) {
@@ -104,10 +104,11 @@ struct DetailMainView: View {
                     }
                     .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
                     .background(Color(hex: "00B1FF"))
-                    .overlay(RoundedRectangle(cornerRadius: 27)
-                        .stroke(Color(hex: "01B2FF")!, lineWidth: 1)
-                    )
                     .clipShape(RoundedRectangle(cornerRadius: 27))
+                    .overlay(RoundedRectangle(cornerRadius: 27)
+                        .stroke(Color(hex: "FFFFF")!, lineWidth: 1)
+                    )
+                    
                     .offset(y: 16)
                     
                     Text("비 온다~~")
