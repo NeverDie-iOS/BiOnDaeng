@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var showSheet = false
-    @AppStorage("selectedTime") var selectedTime: String = "12:00"
+    @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @State private var navigateToMainView = false
     
     var body: some View {
