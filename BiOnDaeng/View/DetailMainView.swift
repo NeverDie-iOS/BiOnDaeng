@@ -4,33 +4,75 @@ struct DetailMainView: View {
     var body: some View {
         VStack {
             HStack(spacing: 6) {
-                VStack {
-                    Text("최고 습도")
-                    Image("Drop")
-                    Text("60%")
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image("Rainfall")
+                            .resizable()
+                            .frame(width: 10, height: 16)
+                        Text("강수량")
+                            .font(.pretendardExtraLight(size: 12))
+                            .foregroundStyle(Color.white)
+                    }
+                    .padding(.leading, 24)
+                    .padding(.top, 16)
+                    
+                    VStack(spacing: 3) {
+                        Text("5mm")
+                            .font(.pretendardMedium(size: 30))
+                            .foregroundStyle(Color.white)
+                        
+                        Button(action: {
+                            // CCTV 불러오기
+                        }){
+                            HStack(spacing: 4) {
+                                Image("CCTV")
+                                    .resizable()
+                                    .frame(width: 16,height: 14)
+                                Text("CCTV")
+                                    .font(.pretendardMedium(size: 11))
+                                    .foregroundStyle(Color.black)
+                            }
+                        }
+                        .frame(width: 70, height: 33)
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 17))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852)
-                .overlay( RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: "4B81C2")!, lineWidth: 1)
-                )
-                VStack {
-                    Text("최저 습도")
-                    Image("Drop")
-                    Text("40%")
+                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852
+                       , alignment: .topLeading)
+                .background(Color(hex: "006FC2"))
+                .clipShape(RoundedRectangle(cornerRadius: 17))
+                
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image("Humidity")
+                            .resizable()
+                            .frame(width: 10,height: 16)
+                        Text("습도")
+                            .font(.pretendardExtraLight(size: 12))
+                            .foregroundStyle(Color.white)
+                    }
+                    .padding(.leading, 24)
+                    .padding(.top, 16)
+                    
+                    VStack(spacing: 3) {
+                        Text("40%")
+                            .font(.pretendardMedium(size: 30))
+                            .foregroundStyle(Color.white)
+                        Text("")
+                            .frame(width: 70, height: 33)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852)
-                .overlay( RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: "4B81C2")!, lineWidth: 1)
-                )
+                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852
+                       , alignment: .topLeading)
+                .background(Color(hex: "006FC2"))
+                .clipShape(RoundedRectangle(cornerRadius: 17))
             }
             .padding(.top, 32)
-            
-            Text("강수 확률")
-                .font(.pretendardMedium(size: 12))
-                .foregroundStyle(Color(hex: "707070")!)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 26)
-                .padding(.leading, 40)
             
             VStack {
                 ScrollView(.horizontal, showsIndicators: true) {
@@ -53,24 +95,12 @@ struct DetailMainView: View {
                         }
                     }
                 }
-                .frame(width: 270 * UIScreen.main.bounds.width / 393, height: 130 * UIScreen.main.bounds.height / 848)
-                .padding(.horizontal, 26)
-                
-                Text("현재 강수 확률 60%")
-                    .padding(.bottom, 26)
-                    .font(.pretendardMedium(size: 12))
             }
+            .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
+            .padding(.horizontal, 26)
             .background(Color(hex: "4B81C2"))
-            .clipShape(RoundedRectangle(cornerRadius: 17))
+            .clipShape(RoundedRectangle(cornerRadius: 27))
             .padding(.top, 8)
-            
-            Text("대기질")
-                .font(.pretendardMedium(size: 12))
-                .foregroundStyle(Color(hex: "707070")!)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 26)
-                .padding(.leading, 40)
-            
             
             HStack{
                 Image("Dog")
@@ -103,7 +133,6 @@ struct DetailMainView: View {
             .background(Color(hex: "4B81C2"))
             .clipShape(RoundedRectangle(cornerRadius: 24))
             .padding(.top, 8)
-
             
             Spacer()
         }
