@@ -89,8 +89,7 @@ struct MainView: View {
                         DetailMainView()
                     }
                     .tabViewStyle(PageTabViewStyle())
-                    
-                    Spacer()
+                    .padding(.top, 27)
                 }
                 
                 if shareViewVisible {

@@ -3,7 +3,7 @@ import SwiftUI
 struct DetailMainView: View {
     var body: some View {
         VStack {
-            HStack(spacing: 6) {
+            HStack(spacing: 12) {
                 VStack(alignment: .leading) {
                     HStack {
                         Image("Rainfall")
@@ -40,7 +40,7 @@ struct DetailMainView: View {
                     .frame(maxWidth: .infinity)
                     .frame(maxHeight: .infinity)
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852
+                .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852
                        , alignment: .topLeading)
                 .background(Color(hex: "006FC2"))
                 .clipShape(RoundedRectangle(cornerRadius: 17))
@@ -67,73 +67,56 @@ struct DetailMainView: View {
                     .frame(maxWidth: .infinity)
                     .frame(maxHeight: .infinity)
                 }
-                .frame(width: 153 * UIScreen.main.bounds.width / 393, height: 159 * UIScreen.main.bounds.height / 852
+                .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852
                        , alignment: .topLeading)
                 .background(Color(hex: "006FC2"))
                 .clipShape(RoundedRectangle(cornerRadius: 17))
             }
-            .padding(.top, 32)
             
-            VStack {
-                ScrollView(.horizontal, showsIndicators: true) {
-                    HStack(spacing: 18) {
-                        ForEach(1...24, id: \.self) { index in
-                            VStack {
-                                Text("오후 12시")
-                                    .font(.pretendardExtraLight(size: 10))
-                                    .foregroundStyle(Color(.white))
-                                    .fixedSize()
-                                Image("Rainy")
-                                    .resizable()
-                                    .frame(width: 32, height: 32)
-                                Text("50%")
-                                    .font(.pretendardExtraLight(size: 12.5))
-                                    .fixedSize()
-                                    .foregroundStyle(Color(hex: "FFDA3F")!)
+            ZStack(alignment: .top) {
+                Image("DetailViewTheme")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(alignment: .leading, spacing: 17) {
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: true) {
+                            HStack(spacing: 20) {
+                                ForEach(1...24, id: \.self) { index in
+                                    VStack {
+                                        Text("오후 12시")
+                                            .font(.pretendardMedium(size: 8))
+                                            .foregroundStyle(Color(.white))
+                                            .fixedSize()
+                                        Image("Rainy")
+                                            .resizable()
+                                            .frame(width: 19, height: 19)
+                                        Text("50%")
+                                            .font(.pretendardMedium(size: 8))
+                                            .fixedSize()
+                                            .foregroundStyle(Color.white)
+                                    }
+                                    .frame(width: 38 * UIScreen.main.bounds.width / 393, height: 82 * UIScreen.main.bounds.height / 852)
+                                }
                             }
-                            .frame(width: 38 * UIScreen.main.bounds.width / 386, height: 82 * UIScreen.main.bounds.height / 848)
+                            .padding(.leading, 27)
+                            .padding(.trailing, 37)
                         }
                     }
+                    .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
+                    .background(Color(hex: "00B1FF"))
+                    .overlay(RoundedRectangle(cornerRadius: 27)
+                        .stroke(Color(hex: "01B2FF")!, lineWidth: 1)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 27))
+                    .offset(y: 16)
+                    
+                    Text("비 온다~~")
+                        .padding(.leading, 4)
                 }
             }
-            .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
-            .padding(.horizontal, 26)
-            .background(Color(hex: "4B81C2"))
-            .clipShape(RoundedRectangle(cornerRadius: 27))
-            .padding(.top, 8)
-            
-            HStack{
-                Image("Dog")
-                    .resizable()
-                    .frame(width: 176 * UIScreen.main.bounds.width / 393, height: 176 * UIScreen.main.bounds.height / 848)
-                
-                VStack {
-                    HStack {
-                        Text("미세먼지")
-                            .font(.pretendardMedium(size: 12))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
-                        Text("나쁨")
-                            .font(.pretendardMedium(size: 12))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
-                    }
-                    
-                    Spacer().frame(height: 15)
-                    
-                    HStack {
-                        Text("초미세먼지")
-                            .font(.pretendardMedium(size: 12))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
-                        Text("나쁨")
-                            .font(.pretendardMedium(size: 12))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
-                    }
-                }
-            }
-            .frame(width: 313 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852)
-            .background(Color(hex: "4B81C2"))
-            .clipShape(RoundedRectangle(cornerRadius: 24))
-            .padding(.top, 8)
-            
+            .padding(.horizontal, 24)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+         
             Spacer()
         }
     }
