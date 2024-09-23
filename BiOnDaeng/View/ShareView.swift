@@ -1,109 +1,108 @@
 import SwiftUI
-import UIKit
+import SafariServices
+import KakaoSDKCommon
 import KakaoSDKShare
+import KakaoSDKTemplate
 
 struct ShareView: View {
-    @State private var showShareSheet = false
-    @State private var imageToShare: URL? = nil
-
+    @State private var safariViewURL: URL? = nil
+    @State private var showSafariView = false
+    
     var body: some View {
-        VStack {
-            // 공유할 뷰
-            shareableView
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                .padding()
-
-            Button(action: {
-                if let image = createImageFromView() {
-                    // 이미지 로컬에 저장
-                    saveImageToDocuments(image: image) { url in
-                        if let url = url {
-                            imageToShare = url
-                            showShareSheet = true
+        ZStack {
+            VStack {
+                Image("ShareTheme")
+                    .resizable()
+                    .frame(width:315, height: 315)
+                
+                Button(action: {
+                    shareToKakaoTalk()
+                }) {
+                    Image("KakaoShareButton")
+                        .resizable()
+                        .frame(width: 56, height: 56)
+                }
+                .padding(.top, 65)
+                .padding(.bottom, 10)
+            }
+            .padding(.top, 41)
+            .padding(.horizontal, 20)
+            .background(RoundedRectangle(cornerRadius: 13))
+            .foregroundStyle(Color.white)
+            .sheet(isPresented: $showSafariView) {
+                if let url = safariViewURL {
+                    SafariView(url: url)
+                }
+            }
+        }
+    }
+    
+    func shareToKakaoTalk() {
+        // 예시로 사용할 템플릿 데이터
+        let content = Content(
+            title: "타이틀 문구",
+            imageUrl: URL(string: "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png")!,
+            description: "#케익 #딸기 #삼평동 #카페 #분위기 #소개팅",
+            link: Link(iosExecutionParams: ["second": "vvv"])
+        )
+        
+        let template = FeedTemplate(content: content, buttons: [Button(title: "앱에서 보기", link: Link(iosExecutionParams: ["second": "vvv"]))])
+        
+        // JSON 인코딩
+        let encoder = JSONEncoder()
+        if let templateJsonData = try? encoder.encode(template) {
+            // JSON 객체로 변환
+            if let templateJsonObject = SdkUtils.toJsonObject(templateJsonData) {
+                // 카카오톡 설치 여부 확인
+                if ShareApi.isKakaoTalkSharingAvailable() {
+                    ShareApi.shared.shareDefault(templateObject: templateJsonObject) { (sharingResult, error) in
+                        if let error = error {
+                            print("Error: \(error)")
+                        } else {
+                            print("shareDefault() success.")
+                            if let sharingResult = sharingResult {
+                                UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                            }
                         }
                     }
+                } else {
+                    // 카카오톡 미설치: 웹 공유 사용
+                    if let url = ShareApi.shared.makeDefaultUrl(templatable: template) {
+                        safariViewURL = url
+                        showSafariView = true
+                    }
                 }
-            }) {
-                Text("이미지 공유하기")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-        }
-        .sheet(isPresented: $showShareSheet) {
-            if let imageUrl = imageToShare {
-                ShareSheet(activityItems: [imageUrl]) // ShareSheet 호출
             }
         }
     }
-
-    // 공유할 뷰를 정의하는 computed property
-    var shareableView: some View {
-        VStack {
-            Text("공유할 뷰입니다!")
-                .font(.largeTitle)
-                .padding()
-            Image(systemName: "star.fill") // 예시 이미지
-                .resizable()
-                .frame(width: 100, height: 100)
-                .foregroundColor(.yellow)
-        }
-        .padding()
-    }
-
-    // UIImage를 생성하는 함수
-    func createImageFromView() -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 200))
-        return renderer.image { context in
-            let view = UIHostingController(rootView: shareableView)
-            view.view.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
-            view.view.backgroundColor = .clear
-            view.view.layer.render(in: context.cgContext)
-        }
-    }
-
-    // 이미지를 Documents 디렉토리에 저장하는 함수
-    func saveImageToDocuments(image: UIImage, completion: @escaping (URL?) -> Void) {
-        guard let data = image.pngData() else {
-            completion(nil)
-            return
-        }
-        
-        // Documents 디렉토리 경로
-        let filename = getDocumentsDirectory().appendingPathComponent("sharedImage.png")
-        
-        do {
-            try data.write(to: filename)
-            completion(filename) // 저장된 파일의 URL 반환
-        } catch {
-            print("이미지 저장 실패: \(error)")
-            completion(nil)
-        }
-    }
-
-    // Documents 디렉토리의 경로를 가져오는 함수
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+}
+struct shareThemView: View {
+    var body: some View {
+        Image("ShareTheme")
     }
 }
 
-struct ShareSheet: UIViewControllerRepresentable {
-    var activityItems: [Any]
 
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        return controller
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+    
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
     }
- 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+    
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareView()
+        Group {
+            ShareView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
+                .previewDisplayName("iPhone 15 Pro")
+            ShareView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
+                .previewDisplayName("iPhone SE (3rd generation)")
+        }
     }
+
 }
