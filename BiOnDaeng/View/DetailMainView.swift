@@ -108,8 +108,7 @@ struct DetailMainView: View {
                     .overlay(RoundedRectangle(cornerRadius: 27)
                         .stroke(Color(hex: "FFFFF")!, lineWidth: 1)
                     )
-                    
-                    .offset(y: 16)
+                    .padding(.top, 16)
                     
                     Text("5mm")
                         .padding(.leading, 4)
