@@ -33,7 +33,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "FFFFFF"))
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color(hex: "4B81C2"))
+                        .background(Color(hex: "006FC2"))
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 20)
