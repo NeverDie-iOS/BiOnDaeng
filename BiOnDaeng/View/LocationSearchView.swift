@@ -33,7 +33,8 @@ struct LocationSearchView: View {
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("취소")
-                        .padding(.trailing, 5)
+                        .foregroundStyle(Color.black)
+                        .padding(.trailing, 10)
                 }
             }
             .background(Color.white)

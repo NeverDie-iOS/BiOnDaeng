@@ -10,42 +10,39 @@ struct MainView: View {
         NavigationView {
             ZStack {
                 VStack {
-                    Spacer().frame(height: 26)
-                    
                     HStack(spacing: 0) {
-                        Spacer().frame(width: 21)
-                        
-                        HStack {
-                            Image("Search")
-                                .resizable()
-                                .frame(width: 19, height: 19)
-                                .padding(.vertical, 6)
-                            
                             Button(action: {
                                 showSheet = true
                             }) {
-                                Text("\(myLocation)")
-                                    .foregroundColor(.black)
-                                    .font(.pretendardMedium(size: 10))
+                                HStack {
+                                    Image("Search")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .scaledToFit()
+                                        .padding(.leading, 7)
+                                    Text("\(myLocation)")
+                                        .foregroundColor(.black)
+                                        .font(.pretendardMedium(size: 10))
+                                }
                             }
-                            .fullScreenCover(isPresented: $showSheet) {
-                                LocationSearchView(myLocation: $myLocation)
-                            }
-                        }
-                        .frame(width: 216, height: 31)
+                            .frame(width: 216, height: 31, alignment: .leading)
                         .background(Color.white)
                         .cornerRadius(8)
                         .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(hex: "E0E0E0")!, lineWidth: 1)
                         )
-                        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+                        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 7)
+                        .padding(.leading, 22)
+                        .fullScreenCover(isPresented: $showSheet) {
+                            LocationSearchView(myLocation: $myLocation)
+                    }
                         
                         Button(action: {
                             locationManager.requestCurrentLocation()
                         }) {
                             Image("CurrentLocation")
                                 .resizable()
-                                .frame(width: 27, height: 27)
+                                .frame(width: 29, height: 28)
                                 .scaledToFit()
                         }
                         .alert(isPresented: $locationManager.showAlert) {
@@ -68,7 +65,7 @@ struct MainView: View {
                         }) {
                             Image("Share")
                                 .resizable()
-                                .frame(width: 23, height: 23)
+                                .frame(width: 24, height: 24)
                                 .scaledToFit()
                         }
                         
@@ -77,11 +74,10 @@ struct MainView: View {
                         NavigationLink(destination: SettingView()) {
                             Image("Setting")
                                 .resizable()
-                                .frame(width: 20, height: 20)
+                                .frame(width: 21, height: 21)
                                 .scaledToFit()
                         }
-                        
-                        Spacer().frame(width: 20)
+                        .padding(.trailing, 21)
                     }
                     
                     TabView {
@@ -91,6 +87,7 @@ struct MainView: View {
                     .tabViewStyle(PageTabViewStyle())
                     .padding(.top, 27)
                 }
+                .padding(.top, 27)
                 
                 if shareViewVisible {
                     Color.black.opacity(0.5)
@@ -100,7 +97,7 @@ struct MainView: View {
                                 shareViewVisible = false
                             }
                         }
-
+                    
                     ShareView()
                         .scaleEffect(shareViewVisible ? 1 : 0.5)
                         .opacity(shareViewVisible ? 1 : 0)
