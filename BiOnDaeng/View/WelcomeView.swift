@@ -41,7 +41,8 @@ struct WelcomeView: View {
                     VStack {
                         Image(systemName: "alarm.fill")
                             .resizable()
-                            .frame(width: 27.0, height: 27.0)
+                            .frame(width: 30, height: 30)
+                            .scaledToFit()
                             .foregroundColor(Color.black)
                             .padding(.top, 12)
                         
@@ -53,7 +54,7 @@ struct WelcomeView: View {
                         Text("비비가 시간에 맞춰 알려드릴게요!")
                             .foregroundStyle(Color(hex: "A5A5A5")!)
                             .font(.pretendardSemiBold(size: 13))
-                            .padding(.top, 15)
+                            .padding(.top, 6)
                         
                         DatePicker("알람 시간", selection: Binding(
                                                     get: {
@@ -77,10 +78,12 @@ struct WelcomeView: View {
                                 showSheet = false
                             }) {
                                 Text("취소")
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(Color.black)
+                                    .frame(maxWidth: .infinity)
                             }
-                            .frame(width: 160, height: 50)
-                            .background(Color.white)
+                            .frame(width: 169, height: 52)
+                            .background(Color(hex: "F8F8F7")!)
+                            .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color(.black), lineWidth: 0.5)
@@ -92,9 +95,10 @@ struct WelcomeView: View {
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
+                                    .frame(maxWidth: .infinity)
                             }
-                            .frame(width: 160, height: 50)
-                            .background(Color(hex: "4B81C2"))
+                            .frame(width: 169, height: 52)
+                            .background(Color(hex: "006FC2"))
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
