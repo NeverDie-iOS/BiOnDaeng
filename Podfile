@@ -8,5 +8,5 @@ target 'BiOnDaeng' do
 
   # Pods for BiOnDaeng
   pod 'Alamofire'
-  pod 'KakaoSDK'
+  pod 'KakaoSDKShare'
 end
