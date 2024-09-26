@@ -12,9 +12,11 @@ struct WelcomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 267)
+                    .padding(.trailing, 40)
                 
                 Text("비온댕에 오신 것을 환영해요!")
                     .font(.pretendardSemiBold(size: 18))
+                    .padding(.leading, 20)
                 
                 Spacer().frame(height: 20)
                 
@@ -22,6 +24,7 @@ struct WelcomeView: View {
                     .font(.pretendardSemiBold(size: 13))
                     .foregroundStyle(Color(hex: "A5A5A5")!)
                     .multilineTextAlignment(.center)
+                    .padding(.leading, 20)
                 
                 Spacer().frame(height: 50)
                 
