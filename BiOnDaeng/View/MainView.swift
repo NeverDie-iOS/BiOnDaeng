@@ -58,17 +58,17 @@ struct MainView: View {
                         }
                         
                         Spacer()
-                        
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 1.0)) {
-                                shareViewVisible.toggle()
-                            }
-                        }) {
-                            Image("Share")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .scaledToFit()
-                        }
+                                          
+//                        Button(action: {
+//                            withAnimation(.easeInOut(duration: 1.0)) {
+//                                shareViewVisible.toggle()
+//                            }
+//                        }) {
+//                            Image("Share")
+//                                .resizable()
+//                                .frame(width: 24, height: 24)
+//                                .scaledToFit()
+//                        }
                         
                         Spacer().frame(width: 6)
                         
@@ -90,22 +90,22 @@ struct MainView: View {
                 }
                 .padding(.top, 27)
                 
-                if shareViewVisible {
-                    Color.black.opacity(0.5)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            withAnimation {
-                                shareViewVisible = false
-                            }
-                        }
-                    
-                    ShareView()
-                        .scaleEffect(shareViewVisible ? 1 : 0.5)
-                        .opacity(shareViewVisible ? 1 : 0)
-                        .animation(.easeInOut(duration: 1.0), value: shareViewVisible)
-                        .transition(AnyTransition.opacity.combined(with: .scale).animation(.easeInOut(duration: 0.5)))
-                        .zIndex(1)
-                }
+//                if shareViewVisible {
+//                    Color.black.opacity(0.5)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .onTapGesture {
+//                            withAnimation {
+//                                shareViewVisible = false
+//                            }
+//                        }
+//                    
+//                    ShareView()
+//                        .scaleEffect(shareViewVisible ? 1 : 0.5)
+//                        .opacity(shareViewVisible ? 1 : 0)
+//                        .animation(.easeInOut(duration: 1.0), value: shareViewVisible)
+//                        .transition(AnyTransition.opacity.combined(with: .scale).animation(.easeInOut(duration: 0.5)))
+//                        .zIndex(1)
+//                }
             }
         }
     }
