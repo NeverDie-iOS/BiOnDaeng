@@ -10,7 +10,7 @@ struct MainThemeView: View {
             .overlay(
                 VStack {
                     ZStack {
-                        Text("\(weatherNow.temperature.isEmpty ? "-" : weatherNow.temperature + "°")")
+                        Text("\(weatherNow.temperature.isEmpty ? "-°" : weatherNow.temperature + "°")")
                             .font(.pretendardMedium(size: 36))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                         Text("25° / 12° / 흐림")
