@@ -72,7 +72,7 @@ struct DetailMainView: View {
                         .padding(.top, 16)
                         
                         VStack(spacing: 3) {
-                            Text("40%")
+                            Text("\(weatherNow.humidity.isEmpty ? "-" : weatherNow.humidity + "%")")
                                 .font(.pretendardMedium(size: 30))
                                 .foregroundStyle(Color.white)
                             Text("")
