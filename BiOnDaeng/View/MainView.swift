@@ -23,6 +23,7 @@ struct MainView: View {
                                 Text(myLocation)
                                     .foregroundColor(.black)
                                     .font(.pretendardMedium(size: 10))
+                                Spacer()
                             }
                         }
                         .frame(width: 216, height: 31, alignment: .leading)
