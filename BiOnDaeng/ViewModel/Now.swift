@@ -4,23 +4,34 @@ import SwiftUI
 import Alamofire
 
 class NowModel: ObservableObject {
+    @AppStorage("nx") var nx: String = "0"
+    @AppStorage("ny") var ny: String = "0"
+    
     @Published var temperature: String = ""
     @Published var rainfall: String = ""
     @Published var humidity: String = ""
     @Published var precipitationType: String = ""
     
     func fetchWeather() {
-        let url = "https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst?"
-        let parameters: [String: Any] = [
-            "authKey": "AqoU-u5aRjCqFPruWgYwxA",
-            "numOfRows": 10,
-            "pageNo": 1,
-            "dataType": "JSON",
-            "base_date": "20240927",
-            "base_time" : "0900",
-            "nx": 55,
-            "ny": 127
-        ]
+            let url = "https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst?"
+        
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd"
+            let baseDate = dateFormatter.string(from: Date())
+
+            dateFormatter.dateFormat = "HH00" // 시간만 가져오고 분은 00으로 설정
+            let baseTime = dateFormatter.string(from: Date())
+            
+            let parameters: [String: Any] = [
+                "authKey": "AqoU-u5aRjCqFPruWgYwxA",
+                "numOfRows": 10,
+                "pageNo": 1,
+                "dataType": "JSON",
+                "base_date": baseDate,
+                "base_time": baseTime,
+                "nx": nx,
+                "ny": ny
+            ]
         
         AF.request(url, parameters: parameters).responseDecodable(of: WeatherResponse.self) { response in
             switch response.result {

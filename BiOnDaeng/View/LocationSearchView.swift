@@ -5,6 +5,10 @@ struct LocationSearchView: View {
     @State private var locations: [String: (String, String)] = loadCSV()
     @Binding var myLocation: String
     @Environment(\.presentationMode) var presentationMode
+    @AppStorage("nx") var nx: String = "0"
+    @AppStorage("ny") var ny: String = "0"
+    
+    
     
     var filteredLocations: [String] {
         if searchText.isEmpty || searchText == " "{
@@ -48,6 +52,8 @@ struct LocationSearchView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     myLocation = location
+                    nx = locations[location]!.0
+                    ny = locations[location]!.1
                     print("\(locations[location]!)")
                 }) {
                     Text("\(location)")
