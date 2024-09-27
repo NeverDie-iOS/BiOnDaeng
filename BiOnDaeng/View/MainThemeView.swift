@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MainThemeView: View {
+    @StateObject private var weatherNow = NowModel()
+    
     var body: some View {
         Image("MainTheme")
             .resizable()
@@ -8,9 +10,9 @@ struct MainThemeView: View {
             .overlay(
                 VStack {
                     ZStack {
-                        Text("15°")
-                            .font(.pretendardMedium(size: 36))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
+                        Text("\(weatherNow.temperature.isEmpty ? "-" : weatherNow.temperature + "°")")
+                                .font(.pretendardMedium(size: 36))
+                                .foregroundStyle(Color(hex: "FBFCFE")!)
                         Text("25° / 12° / 흐림")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
@@ -21,6 +23,9 @@ struct MainThemeView: View {
                         .foregroundStyle(Color(hex: "FBFCFE")!)
                         .padding(.leading, 40)
                 }
+                    .onAppear {
+                                weatherNow.fetchWeather()
+                            }
                     .padding(.top, 20)
                     .padding(.leading, 10),
                 alignment: .topLeading

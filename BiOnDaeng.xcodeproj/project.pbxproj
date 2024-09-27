@@ -25,6 +25,7 @@
 		5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */; };
 		547502A32C7DDB5A007AB18A /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A22C7DDB5A007AB18A /* FontExtension.swift */; };
 		547502A62C7DDC0C007AB18A /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A52C7DDC0C007AB18A /* ColorExtention.swift */; };
+		54D6D7852CA6235100548880 /* Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D6D7842CA6235100548880 /* Now.swift */; };
 		54FED4FC2C97270400EA8C24 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FED4FB2C97270400EA8C24 /* MainViewModel.swift */; };
 		54FED4FE2C972CC900EA8C24 /* MainThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FED4FD2C972CC900EA8C24 /* MainThemeView.swift */; };
 		DCBFFBF4E0DF3B2B373A54F2 /* Pods_BiOnDaeng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE9FE435AC2AE01BCB7B46 /* Pods_BiOnDaeng.framework */; };
@@ -53,6 +54,7 @@
 		5475029F2C7DDA54007AB18A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		547502A22C7DDB5A007AB18A /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		547502A52C7DDC0C007AB18A /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
+		54D6D7842CA6235100548880 /* Now.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Now.swift; sourceTree = "<group>"; };
 		54FED4FB2C97270400EA8C24 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		54FED4FD2C972CC900EA8C24 /* MainThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThemeView.swift; sourceTree = "<group>"; };
 		8B0ADAF0D05A5EE3CF9B8EB7 /* Pods-BiOnDaeng.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BiOnDaeng.debug.xcconfig"; path = "Target Support Files/Pods-BiOnDaeng/Pods-BiOnDaeng.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				542A41222C8B0869005CCA25 /* SearchBarViewModel.swift */,
 				54FED4FB2C97270400EA8C24 /* MainViewModel.swift */,
 				5407CCFC2CA3CD2000CBBF91 /* DetailMainViewModel.swift */,
+				54D6D7842CA6235100548880 /* Now.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				5407CCFD2CA3CD2000CBBF91 /* DetailMainViewModel.swift in Sources */,
 				5475029A2C7DD45B007AB18A /* WelcomeView.swift in Sources */,
 				54FED4FC2C97270400EA8C24 /* MainViewModel.swift in Sources */,
+				54D6D7852CA6235100548880 /* Now.swift in Sources */,
 				544696962C9F80D300BF2060 /* SettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

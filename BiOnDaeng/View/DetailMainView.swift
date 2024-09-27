@@ -8,7 +8,8 @@ struct DetailMainView: View {
     @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
     @State private var isVideoPlayerVisible = false
     @State private var showAlert = false // 지역 미설정 상태에 cctv 버튼 클릭 시 띄우는 Alert
-
+    @StateObject private var weatherNow = NowModel()
+    
     var body: some View {
         ZStack {
             VStack {
@@ -26,7 +27,7 @@ struct DetailMainView: View {
                         .padding(.top, 16)
                         
                         VStack(spacing: 3) {
-                            Text("5mm")
+                            Text("\(weatherNow.rainfall.isEmpty ? "-" : weatherNow.rainfall)")
                                 .font(.pretendardMedium(size: 30))
                                 .foregroundStyle(Color.white)
                             
@@ -57,7 +58,7 @@ struct DetailMainView: View {
                     .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852, alignment: .topLeading)
                     .background(Color(hex: "006FC2"))
                     .clipShape(RoundedRectangle(cornerRadius: 27))
-                
+                    
                     VStack(alignment: .leading) {
                         HStack {
                             Image("Humidity")
@@ -122,19 +123,9 @@ struct DetailMainView: View {
                         )
                         .padding(.top, 16)
                         
-                        Text("5mm")
+                        Text(rainfallDescription())
                             .padding(.leading, 4)
-                            .font(.pretendardExtraLight(size: 30))
-                            .foregroundStyle(Color.white)
-                            .padding(.top, 17)
-                        Text(
-"""
-‘약한비'가 내리고 있습니다.
-1mm 이하의 강수량이라서 일상생활에 큰 지장을 주진 않아요.
-‘이슬비'라고도 이야기하는 가벼운 비에요.
-가볍게 작은 우산을 챙겨도 좋을 거 같네요!
-""")
-                            .padding(.leading, 4)
+                            .padding(.top, 20)
                             .font(.pretendardExtraLight(size: 10))
                             .lineSpacing(12)
                             .foregroundStyle(Color.white)
@@ -143,8 +134,11 @@ struct DetailMainView: View {
                 .padding(.horizontal, 24)
                 .padding(.top, 0)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-             
+                
                 Spacer()
+            }
+            .onAppear {
+                weatherNow.fetchWeather()
             }
             
             if isVideoPlayerVisible, let url = viewModel.closestCCTV?.cctvurl {
@@ -182,7 +176,86 @@ struct DetailMainView: View {
             )
         }
     }
+    
+    private func rainfallDescription() -> String {
+        if weatherNow.rainfall == "30~50mm" {
+            return """
+                '폭우'라고 불리는 수준의 비입니다. 
+                비로 인한 본격적인 피해가 예상되므로 
+                호우 대비가 필요해요.
+                """
+        } else if weatherNow.rainfall == "50.0mm 이상" {
+            return """
+                흔히 말하는 장대비로, 
+                세차게 쏟아지는 비입니다.
+                비로 인해 시야가 확보되지 않아요. 
+                마치 하늘에서 누군가가 양동이로 
+                물을 퍼붓는다는 느낌을 줘요.
+                """
+        } else if weatherNow.rainfall == "0mm" {
+            return """
+                지금은 비가 오지 않아요.
+                오늘은 날씨가 맑아요.
+                가볍게 작은 우산을 챙겨도 좋을 거 같네요.
+                좋은 하루 보내세요~!
+                """
+        } else {
+            switch weatherNow.rainfall {
+                case let x where x.hasSuffix("mm"):
+                    let numericValueString = x.replacingOccurrences(of: "mm", with: "")
+                    if let numericValue = Double(numericValueString) {
+                        switch numericValue {
+                            case 0..<1:
+                                return """
+                            ‘매우 약한 비'가 내리고 있습니다.
+                            1mm 이하의 강수량이라서
+                            일상생활에 큰 지장을 주진 않아요.
+                            ‘이슬비'라고도 이야기하는 가벼운 비입니다.
+                            가볍게 작은 우산을 챙겨도 좋을 것 같네요!
+                            """
+                            case 1..<4:
+                                return """
+                            ‘약한 비'가 내리고 있습니다.
+                            비가 내리는 시간이 길어질 경우,
+                            배수시설이 잘 되어 있지 않으면 
+                            물이 고일 수 있어요.
+                            """
+                            case 4..<8:
+                                return """
+                            ‘보통 비'가 내리고 있습니다.
+                            도로에 물 웅덩이가 생길 수 있어요.
+                            따라서 길을 걸을 때 
+                            신발과 옷을 주의하세요!
+                            또한 비로 인한 교통체증이 예상됩니다.
+                            """
+                            case 8..<15:
+                                return """
+                            ‘많은 비'가 내리고 있습니다.
+                            이 정도의 비는 
+                            쏟아붓는 느낌의 비입니다.
+                            외출 혹은 차량 운행은 
+                            자제하는 것이 좋아요.
+                            """
+                            case 15..<30:
+                                return """
+                            ‘강한 비'가 내리고 있습니다.
+                            이 정도의 비는 단시간에 쏟아질 경우 도로가 잠기고
+                            교통이 순간적으로 마비될 수 있어요.
+                            주택의 지대가 낮거나 지하 시설의 경우 
+                            침수가 발생할 수 있어요.
+                            """
+                            default:
+                                return ""
+                        }
+                    }
+                default:
+                    return ""
+            }
+        }
+        return ""
+    }
 }
+
 struct DetailMainView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
