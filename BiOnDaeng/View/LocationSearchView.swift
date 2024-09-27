@@ -54,7 +54,6 @@ struct LocationSearchView: View {
                     myLocation = location
                     nx = locations[location]!.0
                     ny = locations[location]!.1
-                    print("\(locations[location]!)")
                 }) {
                     Text("\(location)")
                 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @State var showSheet = false
+    @State var showSheet = false // 알람 시간 설정 sheet
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @State private var navigateToMainView = false
     

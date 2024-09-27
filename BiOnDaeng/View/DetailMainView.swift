@@ -7,7 +7,7 @@ struct DetailMainView: View {
     @StateObject private var viewModel = CctvViewModel()
     @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
     @State private var isVideoPlayerVisible = false
-    @State private var showAlert = false // 지역 미설정 상태에 cctv 버튼 클릭 시 띄우는 Alert
+    @State private var showAlert = false // 지역 미설정 상태에 cctv 버튼 클릭 시
     @StateObject private var weatherNow = NowModel()
     
     var body: some View {

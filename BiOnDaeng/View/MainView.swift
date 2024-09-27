@@ -82,7 +82,7 @@ struct MainView: View {
                     }
                     
                     TabView {
-                        MainThemeView(myLocation: $myLocation) // 지역을 MainThemeView에 전달
+                        MainThemeView(myLocation: $myLocation)
                         DetailMainView()
                     }
                     .tabViewStyle(PageTabViewStyle())
