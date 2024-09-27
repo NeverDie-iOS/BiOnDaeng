@@ -44,6 +44,7 @@ class NowModel: ObservableObject {
     }
     
     private func filterWeatherData(items: [WeatherItem]) {
+        rainfall = ""
         for item in items {
             switch item.category {
                 case "T1H":
