@@ -11,21 +11,21 @@ struct MainView: View {
             ZStack {
                 VStack {
                     HStack(spacing: 0) {
-                            Button(action: {
-                                showSheet = true
-                            }) {
-                                HStack {
-                                    Image("Search")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .scaledToFit()
-                                        .padding(.leading, 7)
-                                    Text("\(myLocation)")
-                                        .foregroundColor(.black)
-                                        .font(.pretendardMedium(size: 10))
-                                }
+                        Button(action: {
+                            showSheet = true
+                        }) {
+                            HStack {
+                                Image("Search")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .scaledToFit()
+                                    .padding(.leading, 7)
+                                Text(myLocation)
+                                    .foregroundColor(.black)
+                                    .font(.pretendardMedium(size: 10))
                             }
-                            .frame(width: 216, height: 31, alignment: .leading)
+                        }
+                        .frame(width: 216, height: 31, alignment: .leading)
                         .background(Color.white)
                         .cornerRadius(8)
                         .overlay(RoundedRectangle(cornerRadius: 8)
@@ -35,7 +35,7 @@ struct MainView: View {
                         .padding(.leading, 22)
                         .fullScreenCover(isPresented: $showSheet) {
                             LocationSearchView(myLocation: $myLocation)
-                    }
+                        }
                         
                         Button(action: {
                             locationManager.requestCurrentLocation()
@@ -81,7 +81,7 @@ struct MainView: View {
                     }
                     
                     TabView {
-                        MainThemeView()
+                        MainThemeView(myLocation: $myLocation) // 지역을 MainThemeView에 전달
                         DetailMainView()
                     }
                     .tabViewStyle(PageTabViewStyle())

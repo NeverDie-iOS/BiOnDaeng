@@ -140,6 +140,9 @@ struct DetailMainView: View {
             .onAppear {
                 weatherNow.fetchWeather()
             }
+            .onChange(of: myLocation) { newValue in
+                weatherNow.fetchWeather()
+            }
             
             if isVideoPlayerVisible, let url = viewModel.closestCCTV?.cctvurl {
                 ZStack {

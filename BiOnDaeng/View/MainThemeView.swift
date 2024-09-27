@@ -1,7 +1,7 @@
 import SwiftUI
-
 struct MainThemeView: View {
     @StateObject private var weatherNow = NowModel()
+    @Binding var myLocation: String
     
     var body: some View {
         Image("MainTheme")
@@ -11,8 +11,8 @@ struct MainThemeView: View {
                 VStack {
                     ZStack {
                         Text("\(weatherNow.temperature.isEmpty ? "-" : weatherNow.temperature + "°")")
-                                .font(.pretendardMedium(size: 36))
-                                .foregroundStyle(Color(hex: "FBFCFE")!)
+                            .font(.pretendardMedium(size: 36))
+                            .foregroundStyle(Color(hex: "FBFCFE")!)
                         Text("25° / 12° / 흐림")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
@@ -23,11 +23,14 @@ struct MainThemeView: View {
                         .foregroundStyle(Color(hex: "FBFCFE")!)
                         .padding(.leading, 40)
                 }
-                    .onAppear {
-                                weatherNow.fetchWeather()
-                            }
-                    .padding(.top, 20)
-                    .padding(.leading, 10),
+                .onAppear {
+                    weatherNow.fetchWeather()
+                }
+                .onChange(of: myLocation) { newValue in
+                    weatherNow.fetchWeather()
+                }
+                .padding(.top, 20)
+                .padding(.leading, 10),
                 alignment: .topLeading
             )
     }
