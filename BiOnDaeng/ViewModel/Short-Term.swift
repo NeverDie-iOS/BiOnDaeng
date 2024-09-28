@@ -108,31 +108,19 @@ class ShortTermModel: ObservableObject {
             targetTimes.append(targetTimeString)
         }
 
-        print("Target Times: \(targetTimes)")
-
         for item in items {
-            
-            print("Item: \(item)")
-            
             let fcstDate = item.fcstDate
             let fcstTime = item.fcstTime.prefix(4)
-
-            print("Forecast Date: \(fcstDate), Forecast Time: \(fcstTime)")
 
             let formattedTargetTime = "\(fcstDate)\(fcstTime)"
             if targetTimes.contains(formattedTargetTime) {
                 if item.category == "POP" {
-                    print("Adding POP: \(item.fcstValue)")
                     pop.append(item.fcstValue)
                 } else if item.category == "PTY" {
-                    print("Adding PTY: \(item.fcstValue)")
                     pty.append(item.fcstValue)
                 }
             }
         }
-        
-        print("Final POP: \(pop)")
-        print("Final PTY: \(pty)")
     }
     
     private func filterTmxTmnData(items: [STWeatherItem]) {
