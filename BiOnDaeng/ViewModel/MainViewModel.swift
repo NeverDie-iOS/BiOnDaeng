@@ -8,6 +8,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let locationManager = CLLocationManager()
     @Published var myLocation: String = UserDefaults.standard.string(forKey: "myLocation") ?? ""
     @Published var showAlert = false
+    @State private var locations: [String: (String, String,String,String)] = loadCSV()
+    @AppStorage("nx") var nx: String = "0"
+    @AppStorage("ny") var ny: String = "0"
+    @AppStorage("longitude") var longitude: String = "0"
+    @AppStorage("latitude") var latitude: String = "0"
     
     override init() {
         super.init()
@@ -52,6 +57,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
                     DispatchQueue.main.async {
                         self.myLocation = "\(result.address_name)"
                         UserDefaults.standard.set(self.myLocation, forKey: "myLocation")
+                        self.nx = self.locations[result.address_name]!.0
+                        self.nx = self.locations[result.address_name]!.1
+                        self.longitude = self.locations[result.address_name]!.2
+                        self.latitude = self.locations[result.address_name]!.3
                     }
                 } else {
                     DispatchQueue.main.async {
