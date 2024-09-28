@@ -22,6 +22,7 @@
 		545A94A22CA7883D00283E7F /* Short-Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545A94A12CA7883D00283E7F /* Short-Term.swift */; };
 		546465902C8B1F950046EF7C /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5464658F2C8B1F950046EF7C /* LocationSearchView.swift */; };
 		546611A62C83090100A880E0 /* DetailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546611A52C83090100A880E0 /* DetailMainView.swift */; };
+		5472409F2CA8A592009B5A8F /* PretendardVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5472409E2CA8A592009B5A8F /* PretendardVariable.ttf */; };
 		5475029A2C7DD45B007AB18A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502992C7DD45B007AB18A /* WelcomeView.swift */; };
 		5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */; };
 		547502A32C7DDB5A007AB18A /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A22C7DDB5A007AB18A /* FontExtension.swift */; };
@@ -51,6 +52,7 @@
 		546611A52C83090100A880E0 /* DetailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMainView.swift; sourceTree = "<group>"; };
 		546611A72C830A0E00A880E0 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		546611A82C830A1300A880E0 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		5472409E2CA8A592009B5A8F /* PretendardVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PretendardVariable.ttf; sourceTree = "<group>"; };
 		547502992C7DD45B007AB18A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		5475029F2C7DDA54007AB18A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */,
 				546611A72C830A0E00A880E0 /* Pretendard-ExtraLight.otf */,
 				546611A82C830A1300A880E0 /* Pretendard-Medium.otf */,
+				5472409E2CA8A592009B5A8F /* PretendardVariable.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				542D889E2C97623F00FB2B0F /* GoogleService-Info.plist in Resources */,
 				5403C31F2C7DCB07006F8404 /* Preview Assets.xcassets in Resources */,
 				5403C31C2C7DCB07006F8404 /* Assets.xcassets in Resources */,
+				5472409F2CA8A592009B5A8F /* PretendardVariable.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,7 @@ extension Font {
     static func pretendardMedium(size: CGFloat) -> Font {
             return .custom("Pretendard-Medium", size: size)
         }
+    static func pretendardVariable(size: CGFloat) -> Font {
+            return .custom("PretendardVariable", size: size)
+        }
 }
