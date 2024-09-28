@@ -73,6 +73,7 @@ struct DetailMainView: View {
                 Text(value.isEmpty ? "-" : value)
                     .font(.pretendardMedium(size: 30))
                     .foregroundStyle(Color.white)
+                    .padding(.top, -20)
                 
                 if let action = action {
                     Button(action: action) {
