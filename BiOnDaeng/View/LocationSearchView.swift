@@ -2,11 +2,13 @@ import SwiftUI
 
 struct LocationSearchView: View {
     @State var searchText: String = ""
-    @State private var locations: [String: (String, String)] = loadCSV()
+    @State private var locations: [String: (String, String,String,String)] = loadCSV()
     @Binding var myLocation: String
     @Environment(\.presentationMode) var presentationMode
     @AppStorage("nx") var nx: String = "0"
     @AppStorage("ny") var ny: String = "0"
+    @AppStorage("longitude") var longitude: String = "0"
+    @AppStorage("latitude") var latitude: String = "0"
     
     
     
@@ -54,6 +56,8 @@ struct LocationSearchView: View {
                     myLocation = location
                     nx = locations[location]!.0
                     ny = locations[location]!.1
+                    longitude = locations[location]!.2
+                    latitude = locations[location]!.3
                 }) {
                     Text("\(location)")
                 }

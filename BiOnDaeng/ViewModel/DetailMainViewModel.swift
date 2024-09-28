@@ -67,16 +67,21 @@ struct VideoPlayerView: View {
             if let videoURL = URL(string: url) {
                 VideoPlayer(player: player)
                     .onAppear {
-                        player = AVPlayer(url: videoURL)
-                        player?.play()
+                        DispatchQueue.global().async {
+                            let avPlayer = AVPlayer(url: videoURL)
+                            DispatchQueue.main.async {
+                                player = avPlayer
+                                player?.play()
+                            }
+                        }
                     }
                     .onDisappear {
-                                        player?.pause()
-                                        player = nil
-                                    }
+                        player?.pause()
+                        player = nil
+                    }
                     .edgesIgnoringSafeArea(.all)
             } else {
-                // 실패 Alert
+                //실패시
             }
         }
     }

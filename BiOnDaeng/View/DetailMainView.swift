@@ -10,6 +10,8 @@ struct DetailMainView: View {
     @State private var showAlert = false // 지역 미설정 상태에 cctv 버튼 클릭 시
     @StateObject private var weatherNow = NowModel()
     @StateObject private var weatherShort = ShortTermModel()
+    @AppStorage("longitude") var longitude: String = "0"
+    @AppStorage("latitude") var latitude: String = "0"
     
     
     var body: some View {
@@ -35,7 +37,7 @@ struct DetailMainView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("위치 설정 필요"),
-                message: Text("지역(구/동)을 먼저 선택해주세요."),
+                message: Text("지역(구/동)을 선택해주세요."),
                 dismissButton: .default(Text("확인"))
             )
         }
@@ -46,8 +48,8 @@ struct DetailMainView: View {
                 if myLocation == "지역(구/동)을 설정하세요." {
                     showAlert = true
                 } else {
-                    viewModel.getCCTVUrl(lat: 35.1711249999999, lng: 126.914122222222)
-                    isVideoPlayerVisible = true // 비디오 플레이어 표시
+                    viewModel.getCCTVUrl(lat: Double(latitude)!, lng: Double(longitude)!)
+                    isVideoPlayerVisible = true
                 }
             }
             weatherCard(title: "습도", value: weatherNow.humidity + "%")
@@ -180,6 +182,7 @@ struct DetailMainView: View {
         }
         .transition(.opacity)
     }
+    
     private func rainfallDescription() -> String {
         if weatherNow.rainfall == "30~50mm" {
             return """
