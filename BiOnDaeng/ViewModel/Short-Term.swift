@@ -72,6 +72,9 @@ class ShortTermModel: ObservableObject {
             }
         }
         
+        pop.removeAll()
+        pty.removeAll()
+        
         let parameters: [String: Any] = [
             "authKey": "AqoU-u5aRjCqFPruWgYwxA",
             "numOfRows": 1000,
