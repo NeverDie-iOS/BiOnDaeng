@@ -25,8 +25,6 @@ struct MainThemeView: View {
                         .padding(.leading, 40)
                 }
                 .onAppear {
-                    print("pop: \(weatherShort.pop)")
-                    print("pty: \(weatherShort.pty)")
                     weatherNow.fetchWeather()
                     weatherShort.fetchTmxTmn()
                     weatherShort.fetchPopPty()
