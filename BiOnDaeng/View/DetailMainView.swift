@@ -9,166 +9,27 @@ struct DetailMainView: View {
     @State private var isVideoPlayerVisible = false
     @State private var showAlert = false // 지역 미설정 상태에 cctv 버튼 클릭 시
     @StateObject private var weatherNow = NowModel()
+    @StateObject private var weatherShort = ShortTermModel()
+    
     
     var body: some View {
         ZStack {
             VStack {
-                HStack(spacing: 12) {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Image("Rainfall")
-                                .resizable()
-                                .frame(width: 10, height: 16)
-                            Text("강수량")
-                                .font(.pretendardExtraLight(size: 12))
-                                .foregroundStyle(Color.white)
-                        }
-                        .padding(.leading, 24)
-                        .padding(.top, 16)
-                        
-                        VStack(spacing: 3) {
-                            Text("\(weatherNow.rainfall.isEmpty ? "-" : weatherNow.rainfall)")
-                                .font(.pretendardMedium(size: 30))
-                                .foregroundStyle(Color.white)
-                            
-                            Button(action: {
-                                if myLocation == "지역(구/동)을 설정하세요." {
-                                    showAlert = true
-                                } else {
-                                    viewModel.getCCTVUrl(lat: 35.1711249999999, lng: 126.914122222222)
-                                    isVideoPlayerVisible = true // 비디오 플레이어 표시
-                                }
-                            }) {
-                                HStack(spacing: 4) {
-                                    Image("CCTV")
-                                        .resizable()
-                                        .frame(width: 16, height: 14)
-                                    Text("CCTV")
-                                        .font(.pretendardMedium(size: 11))
-                                        .foregroundStyle(Color.black)
-                                }
-                            }
-                            .frame(width: 70, height: 33)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 17))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(maxHeight: .infinity)
-                    }
-                    .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852, alignment: .topLeading)
-                    .background(Color(hex: "006FC2"))
-                    .clipShape(RoundedRectangle(cornerRadius: 27))
-                    
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Image("Humidity")
-                                .resizable()
-                                .frame(width: 10, height: 16)
-                            Text("습도")
-                                .font(.pretendardExtraLight(size: 12))
-                                .foregroundStyle(Color.white)
-                        }
-                        .padding(.leading, 24)
-                        .padding(.top, 16)
-                        
-                        VStack(spacing: 3) {
-                            Text("\(weatherNow.humidity.isEmpty ? "-" : weatherNow.humidity + "%")")
-                                .font(.pretendardMedium(size: 30))
-                                .foregroundStyle(Color.white)
-                            Text("")
-                                .frame(width: 70, height: 33)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(maxHeight: .infinity)
-                    }
-                    .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852, alignment: .topLeading)
-                    .background(Color(hex: "006FC2"))
-                    .clipShape(RoundedRectangle(cornerRadius: 27))
-                }
-                
-                ZStack(alignment: .top) {
-                    Image("DetailViewTheme")
-                        .resizable()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    VStack(alignment: .leading, spacing: 17) {
-                        VStack {
-                            ScrollView(.horizontal, showsIndicators: true) {
-                                HStack(spacing: 20) {
-                                    ForEach(1...24, id: \.self) { index in
-                                        VStack {
-                                            Text("오후 12시")
-                                                .font(.pretendardMedium(size: 8))
-                                                .foregroundStyle(Color(.white))
-                                                .fixedSize()
-                                            Image("Rainy")
-                                                .resizable()
-                                                .frame(width: 19, height: 19)
-                                            Text("50%")
-                                                .font(.pretendardMedium(size: 8))
-                                                .fixedSize()
-                                                .foregroundStyle(Color.white)
-                                        }
-                                        .frame(width: 38 * UIScreen.main.bounds.width / 393, height: 82 * UIScreen.main.bounds.height / 852)
-                                    }
-                                }
-                                .padding(.leading, 27)
-                                .padding(.trailing, 37)
-                            }
-                        }
-                        .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
-                        .background(Color(hex: "00B1FF"))
-                        .clipShape(RoundedRectangle(cornerRadius: 27))
-                        .overlay(RoundedRectangle(cornerRadius: 27)
-                            .stroke(Color(hex: "FFFFF")!, lineWidth: 1)
-                        )
-                        .padding(.top, 16)
-                        
-                        Text(rainfallDescription())
-                            .padding(.leading, 4)
-                            .padding(.top, 20)
-                            .font(.pretendardExtraLight(size: 10))
-                            .lineSpacing(12)
-                            .foregroundStyle(Color.white)
-                    }
-                }
-                .padding(.horizontal, 24)
-                .padding(.top, 0)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
+                weatherInfoView
+                weatherDetailView
                 Spacer()
             }
             .onAppear {
                 weatherNow.fetchWeather()
+                weatherShort.fetchPopPty()
             }
             .onChange(of: myLocation) { newValue in
                 weatherNow.fetchWeather()
+                weatherShort.fetchPopPty()
             }
             
             if isVideoPlayerVisible, let url = viewModel.closestCCTV?.cctvurl {
-                ZStack {
-                    Color.black.opacity(0.7)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-                        VideoPlayerView(url: url)
-                            .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5)
-                            .cornerRadius(10)
-                        
-                        Spacer().frame(height: 30)
-                        
-                        Button(action: {
-                            isVideoPlayerVisible = false
-                        }) {
-                            Text("닫기")
-                                .font(.headline)
-                                .padding()
-                                .background(Color.white)
-                                .foregroundColor(.black)
-                                .cornerRadius(10)
-                        }
-                    }
-                }
-                .transition(.opacity)
+                videoPlayerView(url: url)
             }
         }
         .alert(isPresented: $showAlert) {
@@ -179,7 +40,146 @@ struct DetailMainView: View {
             )
         }
     }
+    private var weatherInfoView: some View {
+        HStack(spacing: 12) {
+            weatherCard(title: "강수량", value: weatherNow.rainfall) {
+                if myLocation == "지역(구/동)을 설정하세요." {
+                    showAlert = true
+                } else {
+                    viewModel.getCCTVUrl(lat: 35.1711249999999, lng: 126.914122222222)
+                    isVideoPlayerVisible = true // 비디오 플레이어 표시
+                }
+            }
+            weatherCard(title: "습도", value: weatherNow.humidity + "%")
+        }
+    }
     
+    private func weatherCard(title: String, value: String, action: (() -> Void)? = nil) -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Image(title == "강수량" ? "Rainfall" : "Humidity")
+                    .resizable()
+                    .frame(width: 10, height: 16)
+                Text(title)
+                    .font(.pretendardExtraLight(size: 12))
+                    .foregroundStyle(Color.white)
+            }
+            .padding(.leading, 24)
+            .padding(.top, 16)
+            
+            VStack(spacing: 3) {
+                Text(value.isEmpty ? "-" : value)
+                    .font(.pretendardMedium(size: 30))
+                    .foregroundStyle(Color.white)
+                
+                if let action = action {
+                    Button(action: action) {
+                        HStack(spacing: 4) {
+                            Image("CCTV")
+                                .resizable()
+                                .frame(width: 16, height: 14)
+                            Text("CCTV")
+                                .font(.pretendardMedium(size: 11))
+                                .foregroundStyle(Color.black)
+                        }
+                    }
+                    .frame(width: 70, height: 33)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 17))
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .frame(maxHeight: .infinity)
+        }
+        .frame(width: 167 * UIScreen.main.bounds.width / 393, height: 163 * UIScreen.main.bounds.height / 852, alignment: .topLeading)
+        .background(Color(hex: "006FC2"))
+        .clipShape(RoundedRectangle(cornerRadius: 27))
+    }
+    
+    private var weatherDetailView: some View {
+        ZStack(alignment: .top) {
+            Image("DetailViewTheme")
+                .resizable()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            VStack(alignment: .leading, spacing: 17) {
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack(spacing: 20) {
+                        ForEach(weatherShort.pop.indices, id: \.self) { index in
+                            precipitationView(for: index)
+                        }
+                    }
+                    .padding(.leading, 27)
+                    .padding(.trailing, 37)
+                }
+                .frame(width: 318 * UIScreen.main.bounds.width / 393, height: 85 * UIScreen.main.bounds.height / 852)
+                .background(Color(hex: "00B1FF"))
+                .clipShape(RoundedRectangle(cornerRadius: 27))
+                .overlay(RoundedRectangle(cornerRadius: 27)
+                    .stroke(Color(hex: "FFFFF")!, lineWidth: 1)
+                )
+                .padding(.top, 16)
+                
+                Text(rainfallDescription())
+                    .padding(.leading, 4)
+                    .padding(.top, 20)
+                    .font(.pretendardExtraLight(size: 10))
+                    .lineSpacing(12)
+                    .foregroundStyle(Color.white)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 0)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private func precipitationView(for index: Int) -> some View {
+        VStack {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            let targetHour = calendar.component(.hour, from: currentDate) + index + 1
+            let adjustedHour = targetHour % 24
+            
+            Text("\(weatherShort.pop[index] + "%")")
+                .font(.pretendardMedium(size: 8))
+                .foregroundStyle(Color(.white))
+                .fixedSize()
+            Text(getPrecipitationDescription(pty: weatherShort.pty[index]))
+                .frame(width: 19, height: 19)
+            Text("\(adjustedHour)시")
+                .font(.pretendardMedium(size: 8))
+                .fixedSize()
+                .foregroundStyle(Color.white)
+        }
+        .frame(width: 38 * UIScreen.main.bounds.width / 393, height: 82 * UIScreen.main.bounds.height / 852)
+    }
+    
+    private func videoPlayerView(url: String) -> some View {
+        ZStack {
+            Color.black.opacity(0.7)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                VideoPlayerView(url: url)
+                    .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.5)
+                    .cornerRadius(10)
+                
+                Spacer().frame(height: 30)
+                
+                Button(action: {
+                    isVideoPlayerVisible = false
+                }) {
+                    Text("닫기")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                }
+            }
+        }
+        .transition(.opacity)
+    }
     private func rainfallDescription() -> String {
         if weatherNow.rainfall == "30~50mm" {
             return """
@@ -256,6 +256,23 @@ struct DetailMainView: View {
             }
         }
         return ""
+    }
+    
+    func getPrecipitationDescription(pty: String ) -> String {
+        switch pty {
+            case "0":
+                return "맑음"
+            case "1":
+                return "비"
+            case "2":
+                return "비/눈"
+            case "3":
+                return "눈"
+            case "4":
+                return "소나기"
+            default:
+                return "알 수 없음"
+        }
     }
 }
 
