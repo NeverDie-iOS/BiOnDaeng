@@ -14,10 +14,10 @@ struct MainThemeView: View {
                         Text("\(weatherNow.temperature.isEmpty ? "-°" : weatherNow.temperature + "°")")
                             .font(.pretendardMedium(size: 36))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
-                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "°") / \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "°") / \(weatherShort.pty.isEmpty  ? "-" : getPrecipitationDescription(pty: weatherShort.pty[0]))")
+                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "° / ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "° / ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]))")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
-                            .offset(x: 42, y: 11)
+                            .offset(x: 45, y: 11)
                     }
                     Text("강수 확률 \(weatherShort.pop.isEmpty  ? "-%" : weatherShort.pop[0] + "%")")
                         .font(.pretendardMedium(size: 12))
