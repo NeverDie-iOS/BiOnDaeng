@@ -1,7 +1,6 @@
 import Alamofire
 import Foundation
 import SwiftUI
-import Alamofire
 
 class NowModel: ObservableObject {
     @AppStorage("nx") var nx: String = "0"
@@ -13,27 +12,27 @@ class NowModel: ObservableObject {
     @Published var precipitationType: String = ""
     
     func fetchWeather() {
-            let url = "https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst?"
-        
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyyMMdd"
-            let baseDate = dateFormatter.string(from: Date())
+        let url = "https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/getUltraSrtNcst"
 
-            dateFormatter.dateFormat = "HH00" // 시간만 가져오고 분은 00으로 설정
-            let baseTime = dateFormatter.string(from: Date())
-            
-            let parameters: [String: Any] = [
-                "authKey": "AqoU-u5aRjCqFPruWgYwxA",
-                "numOfRows": 10,
-                "pageNo": 1,
-                "dataType": "JSON",
-                "base_date": baseDate,
-                "base_time": baseTime,
-                "nx": nx,
-                "ny": ny
-            ]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let baseDate = dateFormatter.string(from: Date())
+
+        dateFormatter.dateFormat = "HH00"
+        let baseTime = dateFormatter.string(from: Date())
         
-        AF.request(url, parameters: parameters).responseDecodable(of: WeatherResponse.self) { response in
+        let parameters: [String: Any] = [
+            "authKey": "AqoU-u5aRjCqFPruWgYwxA",
+            "numOfRows": 10,
+            "pageNo": 1,
+            "dataType": "JSON",
+            "base_date": baseDate,
+            "base_time": baseTime,
+            "nx": nx,
+            "ny": ny
+        ]
+        
+        AF.request(url, parameters: parameters).responseDecodable(of: NWeatherResponse.self) { response in
             switch response.result {
                 case .success(let weatherResponse):
                     self.filterWeatherData(items: weatherResponse.response.body.items.item)
@@ -43,7 +42,7 @@ class NowModel: ObservableObject {
         }
     }
     
-    private func filterWeatherData(items: [WeatherItem]) {
+    private func filterWeatherData(items: [NWeatherItem]) {
         rainfall = ""
         for item in items {
             switch item.category {
@@ -72,33 +71,31 @@ class NowModel: ObservableObject {
     }
 }
 
-
-
 //MARK: - 초단기 실황 API 데이터 모델
-struct WeatherResponse: Codable {
-    let response: Response
+struct NWeatherResponse: Codable {
+    let response: NResponse
 }
 
-struct Response: Codable {
-    let header: Header
-    let body: Body
+struct NResponse: Codable {
+    let header: NHeader
+    let body: NBody
 }
 
-struct Header: Codable {
+struct NHeader: Codable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct Body: Codable {
+struct NBody: Codable {
     let dataType: String
-    let items: Items
+    let items: NItems
 }
 
-struct Items: Codable {
-    let item: [WeatherItem]
+struct NItems: Codable {
+    let item: [NWeatherItem]
 }
 
-struct WeatherItem: Codable {
+struct NWeatherItem: Codable {
     let baseDate: String
     let baseTime: String
     let category: String
@@ -106,4 +103,3 @@ struct WeatherItem: Codable {
     let ny: Int
     let obsrValue: String
 }
-
