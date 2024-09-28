@@ -83,6 +83,17 @@ struct VideoPlayerView: View {
             } else {
                 //실패시
             }
+            HStack {
+                Text("국토교통부")
+                    .foregroundStyle(Color.white)
+                    .font(.pretendardMedium(size: 14))
+                Text("LIVE")
+                    .foregroundStyle(Color.blue)
+                    .font(.pretendardMedium(size: 14))
+            }
+            Text("실제 상황과 30초~1분 정도 차이가 날 수 있습니다.")
+                .foregroundStyle(Color.gray)
+                .font(.pretendardMedium(size: 10))
         }
     }
 }
