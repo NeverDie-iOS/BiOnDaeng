@@ -12,16 +12,16 @@ struct MainThemeView: View {
                 VStack {
                     ZStack {
                         Text("\(weatherNow.temperature.isEmpty ? "-°" : weatherNow.temperature + "°")")
-                            .font(.pretendardMedium(size: 36))
-                            .foregroundStyle(Color(hex: "FBFCFE")!)
+                            .font(.pretendardLight(size: 45))
+                            .foregroundStyle(Color(hex: "FFFFFF")!)
                         Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "° / ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "° / ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]))")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 45, y: 11)
                     }
                     Text("강수 확률 \(weatherShort.pop.isEmpty  ? "-%" : weatherShort.pop[0] + "%")")
-                        .font(.pretendardMedium(size: 12))
-                        .foregroundStyle(Color(hex: "FBFCFE")!)
+                        .font(.pretendardVariable(size: 12))
+                        .foregroundStyle(Color(hex: "FFFFFF")!)
                         .padding(.leading, 40)
                 }
                 .onAppear {

@@ -19,6 +19,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Pretendard-Light.otf</string>
 		<string>PretendardVariable.ttf</string>
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Pretendard-ExtraLight.otf</string>
