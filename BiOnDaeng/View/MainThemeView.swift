@@ -15,7 +15,7 @@ struct MainThemeView: View {
                             .font(.pretendardLight(size: 45))
                             .foregroundStyle(Color(hex: "FFFFFF")!)
                         Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "° / ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "° / ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]))")
-                            .font(.pretendardExtraLight(size: 7))
+                            .font(.pretendardExtraLight(size: 8))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 45, y: 11)
                     }
