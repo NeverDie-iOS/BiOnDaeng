@@ -80,8 +80,6 @@ struct VideoPlayerView: View {
                         player = nil
                     }
                     .edgesIgnoringSafeArea(.all)
-            } else {
-                //실패시
             }
             HStack {
                 Text("국토교통부")
