@@ -124,7 +124,7 @@ struct DetailMainView: View {
                 
                 Text(rainfallDescription())
                     .padding(.leading, 4)
-                    .padding(.top, 20)
+                    .padding(.top, 10)
                     .font(.pretendardExtraLight(size: 10))
                     .lineSpacing(12)
                     .foregroundStyle(Color.white)
@@ -146,8 +146,9 @@ struct DetailMainView: View {
                 .font(.pretendardMedium(size: 8))
                 .foregroundStyle(Color(.white))
                 .fixedSize()
-            Text(getPrecipitationDescription(pty: weatherShort.pty[index]))
-                .frame(width: 19, height: 19)
+            Image("\(getPrecipitationDescription(pty: weatherShort.pty[index]))")
+                .resizable()
+                .frame(width: 20, height: 20)
             Text("\(adjustedHour)시")
                 .font(.pretendardMedium(size: 8))
                 .fixedSize()
@@ -264,17 +265,17 @@ struct DetailMainView: View {
     func getPrecipitationDescription(pty: String ) -> String {
         switch pty {
             case "0":
-                return "맑음"
+                return "Sunny"
             case "1":
-                return "비"
+                return "Rainy"
             case "2":
-                return "비/눈"
+                return "SnowyAndRainy"
             case "3":
-                return "눈"
+                return "Snowy"
             case "4":
-                return "소나기"
+                return "Shower"
             default:
-                return "알 수 없음"
+                return ""
         }
     }
 }
