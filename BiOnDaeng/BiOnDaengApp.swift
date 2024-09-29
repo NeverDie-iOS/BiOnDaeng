@@ -5,16 +5,11 @@ import KakaoSDKCommon
 
 @main
 struct YourAppName: App {
-    @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
-            if hasSeenWelcome {
-                MainView()
-            } else {
-                WelcomeView()
-            }
+            SplashScreen()
         }
     }
 }
