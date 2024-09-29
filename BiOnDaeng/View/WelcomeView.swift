@@ -95,7 +95,7 @@ struct WelcomeView: View {
                             
                             Button(action: {
                                 showSheet = false
-                                hasSeenWelcome = true
+                                navigateToMainView = true
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
@@ -115,6 +115,10 @@ struct WelcomeView: View {
                     .presentationDetents([.height(400)])
                 }
             }
+            .navigationDestination(isPresented: $navigateToMainView) {
+                           MainView()
+                               .navigationBarBackButtonHidden()
+                       }
         }
     }
 }

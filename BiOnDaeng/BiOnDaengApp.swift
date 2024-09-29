@@ -4,12 +4,16 @@ import UserNotifications
 import KakaoSDKCommon
 
 @main
-struct YourAppName: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+struct BiOnDaengApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    init() {
+        KakaoSDK.initSDK(appKey: "d5db3d55c891ebc5cf8b961bb5ca0131")
+    }
     
     var body: some Scene {
         WindowGroup {
-            SplashScreen()
+            WelcomeView()
         }
     }
 }
@@ -19,13 +23,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     @AppStorage("bionNotifi") var bionNotifi: Bool = false
     
     func application(_ application: UIApplication,
-                         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-            FirebaseApp.configure() 
-            requestNotificationAuthorization()
-
-            Messaging.messaging().delegate = self
-            return true
-        }
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        requestNotificationAuthorization()
+        
+        Messaging.messaging().delegate = self
+        return true
+    }
     
     func requestNotificationAuthorization() {
         let center = UNUserNotificationCenter.current()
@@ -41,11 +45,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         center.delegate = self
         UIApplication.shared.registerForRemoteNotifications()
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
-
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("등록 토큰 수신: \(String(describing: fcmToken))")
     }
