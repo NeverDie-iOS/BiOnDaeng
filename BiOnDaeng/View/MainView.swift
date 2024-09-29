@@ -5,6 +5,7 @@ struct MainView: View {
     @State var shareViewVisible = false
     @StateObject private var locationManager = LocationManager()
     @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
+    @State private var selectedTab = 0 // 현재 선택된 탭을 추적
 
     var body: some View {
         NavigationView {
@@ -58,19 +59,6 @@ struct MainView: View {
                         }
                         
                         Spacer()
-                                          
-//                        Button(action: {
-//                            withAnimation(.easeInOut(duration: 1.0)) {
-//                                shareViewVisible.toggle()
-//                            }
-//                        }) {
-//                            Image("Share")
-//                                .resizable()
-//                                .frame(width: 24, height: 24)
-//                                .scaledToFit()
-//                        }
-                        
-                        Spacer().frame(width: 6)
                         
                         NavigationLink(destination: SettingView()) {
                             Image("Setting")
@@ -81,31 +69,28 @@ struct MainView: View {
                         .padding(.trailing, 21)
                     }
                     
-                    TabView {
+                    TabView(selection: $selectedTab) {
                         MainThemeView(myLocation: $myLocation)
+                            .tag(0)
                         DetailMainView()
+                            .tag(1)
                     }
-                    .tabViewStyle(PageTabViewStyle())
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                     .padding(.top, 27)
+                    
+                    HStack(spacing: 8) {
+                        ForEach(0..<2, id: \.self) { index in
+                            Circle()
+                                .fill(selectedTab == index ? Color(hex: "006FC2")! : Color(hex:"D9D9D9")!)
+                                .frame(width: 10, height: 10)
+                                .onTapGesture {
+                                    selectedTab = index
+                                }
+                        }
+                    }
+                    .padding(.top, 10)
                 }
                 .padding(.top, 27)
-                
-//                if shareViewVisible {
-//                    Color.black.opacity(0.5)
-//                        .edgesIgnoringSafeArea(.all)
-//                        .onTapGesture {
-//                            withAnimation {
-//                                shareViewVisible = false
-//                            }
-//                        }
-//                    
-//                    ShareView()
-//                        .scaleEffect(shareViewVisible ? 1 : 0.5)
-//                        .opacity(shareViewVisible ? 1 : 0)
-//                        .animation(.easeInOut(duration: 1.0), value: shareViewVisible)
-//                        .transition(AnyTransition.opacity.combined(with: .scale).animation(.easeInOut(duration: 0.5)))
-//                        .zIndex(1)
-//                }
             }
         }
     }
