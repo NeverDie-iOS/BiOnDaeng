@@ -5,7 +5,7 @@ struct MainView: View {
     @State var shareViewVisible = false
     @StateObject private var locationManager = LocationManager()
     @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
-    @State private var selectedTab = 0 // 현재 선택된 탭을 추적
+    @State private var selectedTab = 0 
 
     var body: some View {
         NavigationView {
