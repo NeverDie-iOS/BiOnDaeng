@@ -9,15 +9,19 @@ struct MainThemeView: View {
             .resizable()
             .padding(.horizontal)
             .overlay(
-                VStack {
+                VStack(spacing: -5) {
                     ZStack {
                         Text("\(weatherNow.temperature.isEmpty ? "-°" : weatherNow.temperature + "°")")
                             .font(.pretendardLight(size: 45))
                             .foregroundStyle(Color(hex: "FFFFFF")!)
-                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "°/ ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "°/ ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]))")
+                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "°/ ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "°/ ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).0)")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 45, y: 11)
+                        Image("\(weatherShort.pty.isEmpty ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).1)")
+                            .resizable()
+                            .frame(width: 23, height: 23)
+                            .offset(x: 50, y: -6)
                     }
                     .padding(.leading, 10)
                     
@@ -42,20 +46,20 @@ struct MainThemeView: View {
             )
     }
     
-    func getPrecipitationDescription(pty: String ) -> String {
+    func getPrecipitationDescription(pty: String ) -> (String, String) {
             switch pty {
             case "0":
-                return "맑음"
+                return ("맑음", "Sunny")
             case "1":
-                return "비"
+                return ("비", "Rainy")
             case "2":
-                return "비/눈"
+                return ("비/눈", "SnowyAndRainy")
             case "3":
-                return "눈"
+                return ("눈", "Snowy")
             case "4":
-                return "소나기"
+                return ("소나기", "Shower")
             default:
-                return "알 수 없음"
+                return ("-", "-")
             }
         }
 }
