@@ -3,6 +3,7 @@ import SwiftUI
 struct WelcomeView: View {
     @State var showSheet = false // 알람 시간 설정 sheet
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
+    @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
     @State private var navigateToMainView = false
     
     var body: some View {
@@ -60,19 +61,19 @@ struct WelcomeView: View {
                             .padding(.top, 6)
                         
                         DatePicker("알람 시간", selection: Binding(
-                                                    get: {
-                                                        let components = selectedTime.split(separator: ":").map { Int($0) }
-                                                        return Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1]))!
-                                                    },
-                                                    set: { newTime in
-                                                        let formatter = DateFormatter()
-                                                        formatter.dateFormat = "HH:mm"
-                                                        selectedTime = formatter.string(from: newTime)
-                                                    }
-                                                ), displayedComponents: .hourAndMinute)
-                            .datePickerStyle(.wheel)
-                            .frame(width: 150, height: 150)
-                            .padding(.top, 20)
+                            get: {
+                                let components = selectedTime.split(separator: ":").map { Int($0) ?? 0 }
+                                return Calendar.current.date(from: DateComponents(hour: components[0], minute: components[1]))!
+                            },
+                            set: { newTime in
+                                let formatter = DateFormatter()
+                                formatter.dateFormat = "HH:mm"
+                                selectedTime = formatter.string(from: newTime)
+                            }
+                        ), displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.wheel)
+                        .frame(width: 150, height: 150)
+                        .padding(.top, 20)
                         
                         Spacer()
                         
@@ -94,7 +95,7 @@ struct WelcomeView: View {
                             
                             Button(action: {
                                 showSheet = false
-                                navigateToMainView = true
+                                hasSeenWelcome = true
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
@@ -113,10 +114,6 @@ struct WelcomeView: View {
                     }
                     .presentationDetents([.height(400)])
                 }
-            }
-            .navigationDestination(isPresented: $navigateToMainView) {
-                MainView()
-                    .navigationBarBackButtonHidden()
             }
         }
     }

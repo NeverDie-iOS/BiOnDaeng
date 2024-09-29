@@ -4,16 +4,17 @@ import UserNotifications
 import KakaoSDKCommon
 
 @main
-struct BiOnDaengApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    init() {
-        KakaoSDK.initSDK(appKey: "d5db3d55c891ebc5cf8b961bb5ca0131")
-    }
+struct YourAppName: App {
+    @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
-            WelcomeView()
+            if hasSeenWelcome {
+                MainView()
+            } else {
+                WelcomeView()
+            }
         }
     }
 }
@@ -21,6 +22,15 @@ struct BiOnDaengApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     @AppStorage("notificationPermission") var notificationPermission: Bool = false
     @AppStorage("bionNotifi") var bionNotifi: Bool = false
+    
+    func application(_ application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+            FirebaseApp.configure() 
+            requestNotificationAuthorization()
+
+            Messaging.messaging().delegate = self
+            return true
+        }
     
     func requestNotificationAuthorization() {
         let center = UNUserNotificationCenter.current()
