@@ -18,7 +18,7 @@ struct MainThemeView: View {
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 45, y: 11)
-                        Image("\(weatherShort.pty.isEmpty ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).1)")
+                        Image("\(weatherShort.pty.isEmpty ? "Sunny" : getPrecipitationDescription(pty: weatherShort.pty[0]).1)")
                             .resizable()
                             .frame(width: 23, height: 23)
                             .offset(x: 50, y: -6)
