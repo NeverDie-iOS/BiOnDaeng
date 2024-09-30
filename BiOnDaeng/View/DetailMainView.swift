@@ -12,7 +12,7 @@ struct DetailMainView: View {
     @StateObject private var weatherShort = ShortTermModel()
     @AppStorage("longitude") var longitude: String = "0"
     @AppStorage("latitude") var latitude: String = "0"
-    
+    @State private var isFirstAppear = true
     
     var body: some View {
         ZStack {
@@ -22,8 +22,11 @@ struct DetailMainView: View {
                 Spacer()
             }
             .onAppear {
-                weatherNow.fetchWeather()
-                weatherShort.fetchPopPty()
+                if isFirstAppear {
+                    weatherNow.fetchWeather()
+                    weatherShort.fetchPopPty()
+                    isFirstAppear = false
+                }
             }
             .onChange(of: myLocation) { newValue in
                 weatherNow.fetchWeather()
