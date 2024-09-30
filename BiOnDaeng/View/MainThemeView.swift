@@ -5,7 +5,9 @@ struct MainThemeView: View {
     @Binding var myLocation: String
     
     var body: some View {
-        Image("MainTheme")
+        let mainImage = (weatherShort.pty.isEmpty || (weatherShort.pty[0] != "1" && weatherShort.pty[0] != "4")) ? "MainTheme_Sunny" : "MainTheme"
+        
+        Image("\(mainImage)")
             .resizable()
             .padding(.horizontal)
             .overlay(
