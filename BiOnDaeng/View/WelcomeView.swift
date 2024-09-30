@@ -2,9 +2,10 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State var showSheet = false // 알람 시간 설정 sheet
+    @State var showLocationSheet = false // 지역 설정 sheet
+    @AppStorage("myLocation") var myLocation: String = ""
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
-    @State private var navigateToMainView = false
     
     var body: some View {
         NavigationStack {
@@ -95,7 +96,9 @@ struct WelcomeView: View {
                             
                             Button(action: {
                                 showSheet = false
-                                navigateToMainView = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    showLocationSheet = true
+                                }
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
@@ -114,11 +117,10 @@ struct WelcomeView: View {
                     }
                     .presentationDetents([.height(400)])
                 }
+                .fullScreenCover(isPresented: $showLocationSheet) {
+                    LocationSearchView(myLocation: $myLocation)
+                }
             }
-            .navigationDestination(isPresented: $navigateToMainView) {
-                           MainView()
-                               .navigationBarBackButtonHidden()
-                       }
         }
     }
 }

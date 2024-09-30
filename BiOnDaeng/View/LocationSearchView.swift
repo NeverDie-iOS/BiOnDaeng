@@ -10,8 +10,6 @@ struct LocationSearchView: View {
     @AppStorage("longitude") var longitude: String = "0"
     @AppStorage("latitude") var latitude: String = "0"
     
-    
-    
     var filteredLocations: [String] {
         if searchText.isEmpty || searchText == " "{
             return []
@@ -52,12 +50,12 @@ struct LocationSearchView: View {
             
             List(filteredLocations, id: \.self) { location in
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
                     myLocation = location
                     nx = locations[location]!.0
                     ny = locations[location]!.1
                     longitude = locations[location]!.2
                     latitude = locations[location]!.3
+                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("\(location)")
                 }
@@ -66,13 +64,5 @@ struct LocationSearchView: View {
             .padding(0)
         }
         .padding(0)
-    }
-}
-
-struct LocationSearchView_Previews: PreviewProvider {
-    @State static var myLocation: String = ""
-
-    static var previews: some View {
-        LocationSearchView(myLocation: $myLocation)
     }
 }
