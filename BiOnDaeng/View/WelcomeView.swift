@@ -6,7 +6,8 @@ struct WelcomeView: View {
     @AppStorage("myLocation") var myLocation: String = ""
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
-    
+    @State private var navigateToMainView = false
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -120,6 +121,15 @@ struct WelcomeView: View {
                 .fullScreenCover(isPresented: $showLocationSheet) {
                     LocationSearchView(myLocation: $myLocation)
                 }
+            }
+            .onChange(of: myLocation) { newValue in
+                if !newValue.isEmpty {
+                    navigateToMainView = true
+                }
+            }
+            .navigationDestination(isPresented: $navigateToMainView) {
+                MainView()
+                    .navigationBarBackButtonHidden()
             }
         }
     }
