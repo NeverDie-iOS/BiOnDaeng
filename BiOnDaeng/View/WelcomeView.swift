@@ -7,7 +7,11 @@ struct WelcomeView: View {
     @AppStorage("selectedTime") var selectedTime: String = "08:00"
     @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
     @State private var navigateToMainView = false
-
+    @StateObject private var networkMonitor = NetworkMonitor()
+    @AppStorage("uuid") private var uuid: String = ""
+    @AppStorage("fcmToken") private var fcmToken: String = ""
+    @State private var showAlert = false // 네트워크 연결 불안정
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -32,7 +36,11 @@ struct WelcomeView: View {
                 Spacer().frame(height: 50)
                 
                 Button(action: {
-                    showSheet = true
+                    if networkMonitor.isConnected && uuid != "" && fcmToken != "" {
+                        showSheet = true
+                    } else {
+                        showAlert = true
+                    }
                 }) {
                     Text("시작하기")
                         .font(.headline)
@@ -96,10 +104,15 @@ struct WelcomeView: View {
                             )
                             
                             Button(action: {
-                                showSheet = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    showLocationSheet = true
+                                if networkMonitor.isConnected {
+                                    showSheet = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        showLocationSheet = true
+                                    }
+                                } else {
+                                    showAlert = true
                                 }
+                                
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
@@ -131,6 +144,9 @@ struct WelcomeView: View {
                 MainView()
                     .navigationBarBackButtonHidden()
             }
+            .alert("네트워크 연결이 불안정합니다. 다시 시도해주세요", isPresented: $showAlert) {
+                Button("확인", role: .cancel) {}
+                        }
         }
     }
 }
