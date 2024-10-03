@@ -58,7 +58,7 @@ class NowModel: ObservableObject {
                     } else if item.obsrValue == "50mm 이상" {
                         rainfall = "50mm이상"
                     } else {
-                        rainfall = item.obsrValue
+                        rainfall = item.obsrValue + "mm"
                     }
                 case "REH":
                     humidity = item.obsrValue

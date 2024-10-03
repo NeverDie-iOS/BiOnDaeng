@@ -214,6 +214,7 @@ struct DetailMainView: View {
             switch weatherNow.rainfall {
                 case let x where x.hasSuffix("mm"):
                     let numericValueString = x.replacingOccurrences(of: "mm", with: "")
+                    print(numericValueString)
                     if let numericValue = Double(numericValueString) {
                         switch numericValue {
                             case 0..<1:
@@ -256,7 +257,7 @@ struct DetailMainView: View {
                             침수가 발생할 수 있어요.
                             """
                             default:
-                                return ""
+                                return "정보가 없습니다"
                         }
                     }
                 default:
