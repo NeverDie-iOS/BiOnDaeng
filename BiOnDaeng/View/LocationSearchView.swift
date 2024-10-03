@@ -87,7 +87,7 @@ struct LocationSearchView: View {
     }
     
     func saveLocationToDatabase() {
-        checkUUIDExists { exists in
+        checkUUIDExists(uuid: uuid) { exists in
             if exists {
                 updateLocationInDatabase()
             } else {
@@ -96,21 +96,29 @@ struct LocationSearchView: View {
         }
     }
 
-    func checkUUIDExists(completion: @escaping (Bool) -> Void) {
+    func checkUUIDExists(uuid: String, completion: @escaping (Bool) -> Void) {
         let url = "http://211.188.54.174:1337/alarms?uuid=\(uuid)"
-
+        
         AF.request(url)
             .validate()
-            .response { response in
-                if response.response?.statusCode == 200 {
-                    print("uuid 존재")
-                    completion(true)
-                } else {
-                    print("uuid 존재안함")
+            .responseDecodable(of: [Alarm].self) { response in
+                switch response.result {
+                case .success(let alarms):
+                    if alarms.isEmpty {
+                        print("UUID가 존재하지 않습니다.")
+                        completion(false)
+                    } else {
+                        print("UUID가 존재합니다.")
+                        completion(true)
+                    }
+                    
+                case .failure(let error):
+                    print("요청 실패: \(error.localizedDescription)")
                     completion(false)
                 }
             }
     }
+
 
     func updateLocationInDatabase() {
         let url = "http://211.188.54.174:1337/alarms/\(id)"
@@ -196,5 +204,9 @@ struct LocationSearchView: View {
 
 struct Record: Codable {
     let id: Int
+    let uuid: String
+}
+
+struct Alarm: Decodable {
     let uuid: String
 }
