@@ -34,6 +34,7 @@
 		5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5475029D2C7DD977007AB18A /* Pretendard-SemiBold.otf */; };
 		547502A32C7DDB5A007AB18A /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A22C7DDB5A007AB18A /* FontExtension.swift */; };
 		547502A62C7DDC0C007AB18A /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547502A52C7DDC0C007AB18A /* ColorExtention.swift */; };
+		54813D782CAE662A008F0735 /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 54813D772CAE662A008F0735 /* splash.json */; };
 		54D6D7852CA6235100548880 /* Now.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D6D7842CA6235100548880 /* Now.swift */; };
 		54FED4FC2C97270400EA8C24 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FED4FB2C97270400EA8C24 /* MainViewModel.swift */; };
 		54FED4FE2C972CC900EA8C24 /* MainThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FED4FD2C972CC900EA8C24 /* MainThemeView.swift */; };
@@ -69,6 +70,7 @@
 		5475029F2C7DDA54007AB18A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		547502A22C7DDB5A007AB18A /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		547502A52C7DDC0C007AB18A /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
+		54813D772CAE662A008F0735 /* splash.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		54D6D7842CA6235100548880 /* Now.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Now.swift; sourceTree = "<group>"; };
 		54FED4FB2C97270400EA8C24 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		54FED4FD2C972CC900EA8C24 /* MainThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThemeView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		5475029B2C7DD91A007AB18A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54813D772CAE662A008F0735 /* splash.json */,
 				542D677C2CA8F0AA00AB78AF /* test.json */,
 				542A41262C8B099C005CCA25 /* locations */,
 				5475029C2C7DD945007AB18A /* Fonts */,
@@ -299,6 +302,7 @@
 				5475029E2C7DD977007AB18A /* Pretendard-SemiBold.otf in Resources */,
 				542D67722CA8CBB000AB78AF /* Pretendard-ExtraLight.otf in Resources */,
 				542D889E2C97623F00FB2B0F /* GoogleService-Info.plist in Resources */,
+				54813D782CAE662A008F0735 /* splash.json in Resources */,
 				5403C31F2C7DCB07006F8404 /* Preview Assets.xcassets in Resources */,
 				547240A12CA8A677009B5A8F /* Pretendard-Light.otf in Resources */,
 				5403C31C2C7DCB07006F8404 /* Assets.xcassets in Resources */,

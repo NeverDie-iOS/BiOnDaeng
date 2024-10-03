@@ -10,6 +10,7 @@ struct LocationSearchView: View {
     @AppStorage("ny") var ny: String = "0"
     @AppStorage("longitude") var longitude: String = "0"
     @AppStorage("latitude") var latitude: String = "0"
+    @AppStorage("hasSeenWelcome") var hasSeenWelcome: Bool = false
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("uuid") private var uuid: String = ""
     @AppStorage("fcmToken") private var fcmToken: String = ""
@@ -68,6 +69,7 @@ struct LocationSearchView: View {
                         
                         alarmPermission = checkNotificationPermissionSync()
                         saveLocationToDatabase()
+                        hasSeenWelcome = true
                         
                         presentationMode.wrappedValue.dismiss()
                     } else {

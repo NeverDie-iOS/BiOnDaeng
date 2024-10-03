@@ -17,7 +17,7 @@ struct BiOnDaengApp: App {
     
     var body: some Scene {
         WindowGroup {
-            WelcomeView()
+            SplashScreen()
         }
     }
     
