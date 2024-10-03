@@ -157,19 +157,22 @@ struct WelcomeView: View {
     
     func getBaseTime(_ selectedTime: String) -> String {
         let components = selectedTime.split(separator: ":")
-        let hour = Int(components[0])!
-        let minute = Int(components[1])!
+        guard components.count == 2,
+              let hour = Int(components[0]),
+              let minute = Int(components[1]) else {
+            return "Invalid time"
+        }
         
         if hour == 0 && minute <= 45 {
             return "2330"
+        } else if minute <= 45 {
+            let newHour = hour - 1
+            return String(format: "%02d30", newHour)
         } else {
-            if minute <= 45 {
-                return String(hour-1).count == 1 ?  "0" + String(hour-1) + "30" : String(hour-1) + "30"
-            } else {
-                return String(hour).count == 1 ? "0" + String(hour) + "30" : String(hour) + "30"
-            }
+            return String(format: "%02d30", hour)
         }
     }
+
     
     func isYesterday(_ selectedTime: String) -> Bool {
         let components = selectedTime.split(separator: ":")
