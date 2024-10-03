@@ -1,4 +1,5 @@
 import SwiftUI
+import Alamofire
 
 struct WelcomeView: View {
     @State var showSheet = false // 알람 시간 설정 sheet
@@ -10,6 +11,8 @@ struct WelcomeView: View {
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("uuid") private var uuid: String = ""
     @AppStorage("fcmToken") private var fcmToken: String = ""
+    @AppStorage("baseTime") private var baseTime: String = ""
+    @AppStorage("isYesterday") private var isYesterday: Bool = false
     @State private var showAlert = false // 네트워크 연결 불안정
     
     var body: some View {
@@ -105,6 +108,8 @@ struct WelcomeView: View {
                             
                             Button(action: {
                                 if networkMonitor.isConnected {
+                                    baseTime = getBaseTime(selectedTime)
+                                    isYesterday = isYesterday(selectedTime)
                                     showSheet = false
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                         showLocationSheet = true
@@ -149,6 +154,44 @@ struct WelcomeView: View {
                         }
         }
     }
+    
+    func getBaseTime(_ selectedTime: String) -> String {
+        let components = selectedTime.split(separator: ":")
+        let hour = Int(components[0])!
+        let minute = Int(components[1])!
+        
+        if hour == 0 && minute <= 45 {
+            return "2330"
+        } else {
+            if minute <= 45 {
+                return String(hour-1).count == 1 ?  "0" + String(hour-1) + "30" : String(hour-1) + "30"
+            } else {
+                return String(hour).count == 1 ? "0" + String(hour) + "30" : String(hour) + "30"
+            }
+        }
+    }
+    
+    func isYesterday(_ selectedTime: String) -> Bool {
+        let components = selectedTime.split(separator: ":")
+        let hour = Int(components[0])!
+        let minute = Int(components[1])!
+        
+        if hour == 0 && minute <= 45 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+struct AlarmResponseModel: Decodable {
+    let uuid: String
+    let nx: String?
+    let ny: String?
+    let base_time: String?
+    let isYesterday: Bool?
+    let alarmPermission: Bool?
+    let fcmToken: String?
 }
 
 struct WelcomeView_Previews: PreviewProvider {
