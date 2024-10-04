@@ -1,5 +1,6 @@
 import SwiftUI
 import UserNotifications
+import Alamofire
 
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -11,7 +12,10 @@ struct SettingView: View {
     @State private var showAlarmAlert = false
     @AppStorage("myLocation") var myLocation: String = "설정"
     @State var showLocationSheet = false
-
+    @AppStorage("id") private var id: Int = 0
+    @StateObject private var networkMonitor = NetworkMonitor()
+    @AppStorage("uuid") private var uuid: String = ""
+    
     var body: some View {
         VStack {
             HStack {
@@ -69,10 +73,15 @@ struct SettingView: View {
                             )
                             
                             Button(action: {
-                                showAlarmSheet = false
-                                let formatter = DateFormatter()
-                                formatter.dateFormat = "HH:mm"
-                                selectedTime = formatter.string(from: tempSelectedTime)
+                                if networkMonitor.isConnected {
+                                    showAlarmSheet = false
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "HH:mm"
+                                    selectedTime = formatter.string(from: tempSelectedTime)
+                                    fetchRecordID(using: uuid) {
+                                        updateBaseTimeInDatabase()
+                                    }
+                                }
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
@@ -224,6 +233,80 @@ struct SettingView: View {
         let period = hour < 12 ? "오전" : "오후"
         let adjustedHour = hour % 12 == 0 ? 12 : hour % 12
         return String(format: "%@ %02d:%02d", period, adjustedHour, minute)
+    }
+    
+    func getBaseTime(_ selectedTime: String) -> String {
+        let components = selectedTime.split(separator: ":")
+        guard components.count == 2,
+              let hour = Int(components[0]),
+              let minute = Int(components[1]) else {
+            return "Invalid time"
+        }
+        
+        if hour == 0 && minute <= 45 {
+            return "2330"
+        } else if minute <= 45 {
+            let newHour = hour - 1
+            return String(format: "%02d30", newHour)
+        } else {
+            return String(format: "%02d30", hour)
+        }
+    }
+    
+    func isYesterday(_ selectedTime: String) -> Bool {
+        let components = selectedTime.split(separator: ":")
+        let hour = Int(components[0])!
+        let minute = Int(components[1])!
+        
+        if hour == 0 && minute <= 45 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func updateBaseTimeInDatabase() {
+        let url = "http://211.188.54.174:1337/alarms/\(id)"
+        print("updateBaseTimeInDatabase id:\(id)")
+        let parameters: [String: Any] = [
+            "base_time": getBaseTime(selectedTime),
+            "isYesterday": isYesterday(selectedTime)
+        ]
+        
+        AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    print("BaseTime/isYesterday 업데이트.")
+                case .failure(let error):
+                    print("BaseTime/isYesterday 업데이트 실패: \(error)")
+                    if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                        print("서버 응답: \(errorMessage)")
+                    }
+                }
+            }
+    }
+    
+    func fetchRecordID(using uuid: String, completion: @escaping () -> Void) {
+        let url = "http://211.188.54.174:1337/alarms?uuid=\(uuid)"
+        
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: [Record].self) { response in
+                switch response.result {
+                case .success(let records):
+                    if let firstRecord = records.first {
+                        id = firstRecord.id
+                        print("id = \(firstRecord.id)")
+                        completion()
+                    } else {
+                        print("레코드를 찾을 수 없습니다.")
+                    }
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
     }
 }
 
