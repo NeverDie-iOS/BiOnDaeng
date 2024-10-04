@@ -56,7 +56,7 @@ struct WelcomeView: View {
                 .padding(.horizontal, 30)
                 .sheet(isPresented: $showSheet) {
                     VStack {
-                        Image(systemName: "alarm.fill")
+                        Image("Alarm")
                             .resizable()
                             .frame(width: 30, height: 30)
                             .scaledToFit()
