@@ -28,7 +28,7 @@ struct WelcomeView: View {
                     .font(.pretendardSemiBold(size: 18))
                     .padding(.top, 23)
                 
-                Text("저는 비가 오면 우산을 챙겨주는 강아지 비비예요.\n자, 시작할 준비 되셨나요?")
+                Text("저는 비가 오면 우산을 챙겨주는 강아지 비비예요.\n자, 시작할 준비 되셨나요?😎")
                     .font(.pretendardSemiBold(size: 14))
                     .foregroundStyle(Color(hex: "A5A5A5")!)
                     .multilineTextAlignment(.center)
@@ -58,7 +58,7 @@ struct WelcomeView: View {
                     VStack {
                         Image("Alarm")
                             .resizable()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 37, height: 37)
                             .scaledToFit()
                             .foregroundColor(Color.black)
                             .padding(.top, 12)
@@ -66,12 +66,14 @@ struct WelcomeView: View {
                         Text("알람 설정")
                             .foregroundStyle(Color.black)
                             .font(.pretendardSemiBold(size: 20))
-                            .padding(.top, 7)
                         
-                        Text("비비가 시간에 맞춰 알려드릴게요!")
+                        Text("☔️앞으로 6시간 안에 비가 오면☔️\n비비가 선택한 시간에 알려드릴게요🐶🐾")
                             .foregroundStyle(Color(hex: "A5A5A5")!)
                             .font(.pretendardSemiBold(size: 13))
-                            .padding(.top, 6)
+                            .padding(.top, 4)
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(8)
+                            .kerning(1)
                         
                         DatePicker("알람 시간", selection: Binding(
                             get: {
