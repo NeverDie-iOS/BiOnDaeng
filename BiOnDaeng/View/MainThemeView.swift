@@ -16,9 +16,9 @@ struct MainThemeView: View {
                 VStack(spacing: -5) {
                     ZStack {
                         Text("\(weatherNow.temperature.isEmpty ? "⁻°" : weatherNow.temperature + "°")")
-                            .font(.pretendardLight(size: 45))
+                            .font(.pretendardMedium(size: 45))
                             .foregroundStyle(Color(hex: "FFFFFF")!)
-                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "°/ ") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "°/ ") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).0)")
+                        Text("\(weatherShort.tmx.isEmpty ? "" : weatherShort.tmx + "°/") \(weatherShort.tmn.isEmpty ? "" : weatherShort.tmn + "°/") \(weatherShort.pty.isEmpty  ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).0)")
                             .font(.pretendardExtraLight(size: 7))
                             .foregroundStyle(Color(hex: "FBFCFE")!)
                             .offset(x: 45, y: 11)
@@ -30,7 +30,7 @@ struct MainThemeView: View {
                     .padding(.leading, 10)
                     
                     Text("강수 확률 \(weatherShort.pop.isEmpty  ? "-%" : weatherShort.pop[0] + "%")")
-                        .font(.pretendardVariable(size: 12))
+                        .font(.pretendardVariable(size: 14))
                         .foregroundStyle(Color(hex: "FFFFFF")!)
                         .padding(.leading, 45)
                 }
