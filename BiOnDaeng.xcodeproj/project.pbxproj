@@ -18,7 +18,6 @@
 		542D67742CA8CBB700AB78AF /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 542D67732CA8CBB700AB78AF /* Pretendard-Medium.otf */; };
 		542D67762CA8E8C600AB78AF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542D67752CA8E8C600AB78AF /* SplashScreen.swift */; };
 		542D67792CA8EB0100AB78AF /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 542D67782CA8EB0100AB78AF /* Lottie */; };
-		542D677D2CA8F0AA00AB78AF /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 542D677C2CA8F0AA00AB78AF /* test.json */; };
 		542D889E2C97623F00FB2B0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 542D889D2C97623F00FB2B0F /* GoogleService-Info.plist */; };
 		542D88A12C97636200FB2B0F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 542D88A02C97636200FB2B0F /* FirebaseAnalytics */; };
 		542D88A32C97636200FB2B0F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 542D88A22C97636200FB2B0F /* FirebaseMessaging */; };
@@ -54,7 +53,6 @@
 		542D67712CA8CBB000AB78AF /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		542D67732CA8CBB700AB78AF /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		542D67752CA8E8C600AB78AF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		542D677C2CA8F0AA00AB78AF /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		542D889D2C97623F00FB2B0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		542D88A42C9763CF00FB2B0F /* BiOnDaeng.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BiOnDaeng.entitlements; sourceTree = "<group>"; };
 		544696952C9F80D300BF2060 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				54813D772CAE662A008F0735 /* splash.json */,
-				542D677C2CA8F0AA00AB78AF /* test.json */,
 				542A41262C8B099C005CCA25 /* locations */,
 				5475029C2C7DD945007AB18A /* Fonts */,
 			);
@@ -307,7 +304,6 @@
 				547240A12CA8A677009B5A8F /* Pretendard-Light.otf in Resources */,
 				5403C31C2C7DCB07006F8404 /* Assets.xcassets in Resources */,
 				5472409F2CA8A592009B5A8F /* PretendardVariable.ttf in Resources */,
-				542D677D2CA8F0AA00AB78AF /* test.json in Resources */,
 				542D67742CA8CBB700AB78AF /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
