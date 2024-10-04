@@ -95,15 +95,16 @@ struct WelcomeView: View {
                                 showSheet = false
                             }) {
                                 Text("취소")
+                                    .font(.pretendardSemiBold(size: 15))
                                     .foregroundStyle(Color.black)
                                     .frame(maxWidth: .infinity)
                             }
                             .frame(width: 169, height: 52)
-                            .background(Color(hex: "F8F8F7")!)
+                            .background(Color(hex: "FFFCF1")!)
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(.black), lineWidth: 0.5)
+                                    .stroke(Color(hex: "FFE58C")!, lineWidth: 1)
                             )
                             
                             Button(action: {
@@ -119,7 +120,8 @@ struct WelcomeView: View {
                                 }
                                 
                             }) {
-                                Text("선택완료")
+                                Text("선택 완료")
+                                    .font(.pretendardSemiBold(size: 18))
                                     .foregroundStyle(.white)
                                     .frame(maxWidth: .infinity)
                             }
