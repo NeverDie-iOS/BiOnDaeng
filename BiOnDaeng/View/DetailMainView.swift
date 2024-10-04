@@ -128,9 +128,8 @@ struct DetailMainView: View {
                 
                 Text(rainfallDescription())
                     .padding(.leading, 4)
-                    .padding(.top, 10)
-                    .font(.pretendardExtraLight(size: 10))
-                    .lineSpacing(12)
+                    .font(.pretendardLight(size: 15))
+                    .lineSpacing(6)
                     .foregroundStyle(Color.white)
             }
         }
@@ -140,21 +139,21 @@ struct DetailMainView: View {
     }
     
     private func precipitationView(for index: Int) -> some View {
-        VStack {
+        VStack(spacing: 5) {
             let currentDate = Date()
             let calendar = Calendar.current
             let targetHour = calendar.component(.hour, from: currentDate) + index + 1
             let adjustedHour = targetHour % 24
             
-            Text("\(weatherShort.pop[index] + "%")")
-                .font(.pretendardMedium(size: 8))
+            Text("  \(weatherShort.pop[index] + "%")")
+                .font(.pretendardMedium(size: 13))
                 .foregroundStyle(Color(.white))
                 .fixedSize()
             Image("\(getPrecipitationDescription(pty: weatherShort.pty[index]))")
                 .resizable()
-                .frame(width: 20, height: 20)
+                .frame(width: 20, height: 21)
             Text("\(adjustedHour)시")
-                .font(.pretendardMedium(size: 8))
+                .font(.pretendardLight(size: 11))
                 .fixedSize()
                 .foregroundStyle(Color.white)
         }
