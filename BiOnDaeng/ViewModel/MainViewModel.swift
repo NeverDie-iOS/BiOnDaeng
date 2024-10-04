@@ -20,18 +20,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
 
     func requestCurrentLocation() {
+        print("requestCurrentLocation")
         locationManager.requestLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("didupdateLocation")
         guard let newLocation = locations.last else { return }
         reverseGeocodeLocation(location: newLocation)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("didfailwithError")
         let status = CLLocationManager().authorizationStatus
         if status == .denied || status == .restricted {
             DispatchQueue.main.async {
@@ -47,6 +51,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
 
     private func reverseGeocodeLocation(location: CLLocation) {
+        print("reverseGeocode")
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
         let apiKey = "6d53b6a7f23ce32315fee9e5e7256035"
