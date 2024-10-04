@@ -288,7 +288,8 @@ struct SettingView: View {
         print("updateBaseTimeInDatabase id:\(id)")
         let parameters: [String: Any] = [
             "base_time": getBaseTime(selectedTime),
-            "isYesterday": isYesterday(selectedTime)
+            "isYesterday": isYesterday(selectedTime),
+            "selectedTime": selectedTime
         ]
         
         AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default)

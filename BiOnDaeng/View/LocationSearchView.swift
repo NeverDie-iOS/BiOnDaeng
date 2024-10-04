@@ -19,6 +19,7 @@ struct LocationSearchView: View {
     @AppStorage("alarmPermission") private var alarmPermission: Bool = false
     @State private var showAlert = false // 네트워크 연결 불안정
     @AppStorage("id") private var id: Int = 0
+    @AppStorage("selectedTime") var selectedTime: String = "08:00"
     
     var filteredLocations: [String] {
         if searchText.isEmpty || searchText == " " {
@@ -153,7 +154,8 @@ struct LocationSearchView: View {
             "base_time": baseTime,
             "isYesterday": isYesterday,
             "alarmPermission": alarmPermission,
-            "fcmToken": fcmToken
+            "fcmToken": fcmToken,
+            "selectedTime": selectedTime
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
