@@ -5,8 +5,10 @@ struct MainView: View {
     @State var shareViewVisible = false
     @StateObject private var locationManager = LocationManager()
     @AppStorage("myLocation") var myLocation: String = "지역(구/동)을 설정하세요."
-    @State private var selectedTab = 0 
-
+    @StateObject private var networkMonitor = NetworkMonitor()
+    @State private var selectedTab = 0
+    @State private var showAlert = false // 네트워크 연결 불안정
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,12 +42,19 @@ struct MainView: View {
                         }
                         
                         Button(action: {
-                            locationManager.requestCurrentLocation()
+                            if networkMonitor.isConnected {
+                                locationManager.requestCurrentLocation()
+                            } else {
+                                showAlert = true
+                            }
                         }) {
                             Image("CurrentLocation")
                                 .resizable()
                                 .frame(width: 29, height: 28)
                                 .scaledToFit()
+                        }
+                        .alert("네트워크 연결이 불안정합니다. 다시 시도해주세요", isPresented: $showAlert) {
+                            Button("확인", role: .cancel) {}
                         }
                         .alert(isPresented: $locationManager.showAlert) {
                             Alert(

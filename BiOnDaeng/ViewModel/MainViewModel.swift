@@ -13,8 +13,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     @AppStorage("ny") var ny: String = "0"
     @AppStorage("longitude") var longitude: String = "0"
     @AppStorage("latitude") var latitude: String = "0"
-    @StateObject private var networkMonitor = NetworkMonitor()
-    @State private var showNetworkAlert = false // 네트워크 연결 불안정
     @AppStorage("id") private var id: Int = 0
     @AppStorage("uuid") private var uuid: String = ""
     
