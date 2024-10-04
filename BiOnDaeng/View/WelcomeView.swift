@@ -17,24 +17,24 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(alignment: .center) {
                 Image("Bibi")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 250, height: 267)
+                    .frame(width: 241, height: 256)
                     .padding(.trailing, 40)
                 
                 Text("비온댕에 오신 것을 환영해요!")
                     .font(.pretendardSemiBold(size: 18))
-                    .padding(.leading, 20)
-                
-                Spacer().frame(height: 20)
+                    .padding(.top, 23)
                 
                 Text("저는 비가 오면 우산을 챙겨주는 강아지 비비예요.\n자, 시작할 준비 되셨나요?")
-                    .font(.pretendardSemiBold(size: 13))
+                    .font(.pretendardSemiBold(size: 14))
                     .foregroundStyle(Color(hex: "A5A5A5")!)
                     .multilineTextAlignment(.center)
-                    .padding(.leading, 20)
+                    .lineSpacing(8)
+                    .padding(.top, 1)
+                    
                 
                 Spacer().frame(height: 50)
                 
@@ -53,7 +53,7 @@ struct WelcomeView: View {
                         .background(Color(hex: "006FC2"))
                         .cornerRadius(10)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 30)
                 .sheet(isPresented: $showSheet) {
                     VStack {
                         Image(systemName: "alarm.fill")
