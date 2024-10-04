@@ -23,6 +23,10 @@ class CctvViewModel: ObservableObject {
     @Published var showVideoPlayer: Bool = false
 
     func getCCTVUrl(lat: Double, lng: Double) {
+        
+        closestCCTV = nil
+        showVideoPlayer = false
+        
         let minX = lng - 1
         let maxX = lng + 1
         let minY = lat - 1
