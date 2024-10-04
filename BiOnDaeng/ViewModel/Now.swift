@@ -16,10 +16,26 @@ class NowModel: ObservableObject {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
-        let baseDate = dateFormatter.string(from: Date())
-
-        dateFormatter.dateFormat = "HH00"
-        let baseTime = dateFormatter.string(from: Date())
+        var baseDate = dateFormatter.string(from: Date())
+        
+        let currentDate = Date()
+        dateFormatter.dateFormat = "HH"
+        let currentHour = Int(dateFormatter.string(from: currentDate)) ?? 0
+        dateFormatter.dateFormat = "mm"
+        let currentMinute = Int(dateFormatter.string(from: currentDate)) ?? 0
+        
+        var baseTime: String
+        
+        if currentHour == 0 && currentMinute < 10 {
+            baseDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!)
+            baseTime = "2300"
+        } else if currentMinute >= 10 {
+            baseTime = String(format: "%02d00", currentHour)
+        } else {
+            let oneHourAgo = Calendar.current.date(byAdding: .hour, value: -1, to: currentDate)!
+            let oneHourAgoHour = Calendar.current.component(.hour, from: oneHourAgo)
+            baseTime = String(format: "%02d00", oneHourAgoHour)
+        }
         
         let parameters: [String: Any] = [
             "authKey": "AqoU-u5aRjCqFPruWgYwxA",
@@ -41,6 +57,7 @@ class NowModel: ObservableObject {
             }
         }
     }
+
     
     private func filterWeatherData(items: [NWeatherItem]) {
         rainfall = ""
