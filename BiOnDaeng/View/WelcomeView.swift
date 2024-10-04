@@ -69,7 +69,7 @@ struct WelcomeView: View {
                         
                         Text("☔️앞으로 6시간 안에 비가 오면☔️\n비비가 선택한 시간에 알려드릴게요🐶🐾")
                             .foregroundStyle(Color(hex: "A5A5A5")!)
-                            .font(.pretendardSemiBold(size: 13))
+                            .font(.pretendardSemiBold(size: 15))
                             .padding(.top, 4)
                             .multilineTextAlignment(.center)
                             .lineSpacing(8)
