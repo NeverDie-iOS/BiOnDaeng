@@ -43,7 +43,7 @@ struct MainView: View {
                         
                         Button(action: {
                             if networkMonitor.isConnected {
-                                locationManager.requestCurrentLocation()
+                                locationManager.startUpdatingLocation()
                             } else {
                                 showAlert = true
                             }

@@ -5,6 +5,7 @@ import Alamofire
 import SwiftUI
 
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
+    @Published var location: CLLocationCoordinate2D?
     private let locationManager = CLLocationManager()
     @Published var myLocation: String = UserDefaults.standard.string(forKey: "myLocation") ?? ""
     @Published var showAlert = false
@@ -20,18 +21,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
-    func requestCurrentLocation() {
-        print("requestCurrentLocation")
-        locationManager.requestLocation()
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
     }
+    
+    func stopUpdatingLocation() {
+            locationManager.stopUpdatingLocation()
+        }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didupdateLocation")
-        guard let newLocation = locations.last else { return }
-        reverseGeocodeLocation(location: newLocation)
+        guard let location = locations.last else { return }
+        self.location = location.coordinate
+        reverseGeocodeLocation(location: location)
+        print("위도: \(location.coordinate.latitude), 경도: \(location.coordinate.longitude)")
+        stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
