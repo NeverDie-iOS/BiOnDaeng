@@ -15,6 +15,7 @@ struct SettingView: View {
     @AppStorage("id") private var id: Int = 0
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage("uuid") private var uuid: String = ""
+    @State private var showAlert = false // 네트워크 연결 불안정
     
     var body: some View {
         VStack {
@@ -81,6 +82,8 @@ struct SettingView: View {
                                     fetchRecordID(using: uuid) {
                                         updateBaseTimeInDatabase()
                                     }
+                                } else {
+                                    showAlert = true
                                 }
                             }) {
                                 Text("선택완료")
@@ -95,6 +98,9 @@ struct SettingView: View {
                             )
                         }
                         Spacer()
+                    }
+                    .alert("네트워크 연결이 불안정합니다. 다시 시도해주세요", isPresented: $showAlert) {
+                        Button("확인", role: .cancel) {}
                     }
                     .presentationDetents([.height(400)])
                 }
@@ -112,28 +118,40 @@ struct SettingView: View {
                     .padding(.leading, 16)
                 
                 Toggle(isOn: Binding(
-                    get: {
-                        bionNotifi
-                    },
-                    set: { newValue in
-                        if newValue {
-                            checkNotificationPermission { isAuthorized in
-                                if isAuthorized {
-                                    notificationPermission = true
-                                    bionNotifi = true
-                                } else {
-                                    showAlarmAlert = true
+                        get: {
+                            bionNotifi
+                        },
+                        set: { newValue in
+                            if networkMonitor.isConnected {
+                                fetchRecordID(using: uuid) {
+                                    updateAlarmPermissionInDatabase(isEnabled: newValue)
+
+                                    if newValue {
+                                        checkNotificationPermission { isAuthorized in
+                                            if isAuthorized {
+                                                notificationPermission = true
+                                                bionNotifi = true
+                                            } else {
+                                                showAlarmAlert = true
+                                                bionNotifi = false
+                                            }
+                                        }
+                                    } else {
+                                        notificationPermission = false
+                                        bionNotifi = false
+                                    }
                                 }
+                            } else {
+                                showAlert = true
                             }
-                        } else {
-                            notificationPermission = false
-                            bionNotifi = false
                         }
-                    }
-                )) {
+                    )) {
                     
                 }
                 .padding(.trailing, 12)
+                .alert("네트워크 연결이 불안정합니다. 다시 시도해주세요", isPresented: $showAlert) {
+                    Button("확인", role: .cancel) {}
+                }
                 .alert(isPresented: $showAlarmAlert) {
                     Alert(
                         title: Text("알림 설정 필요"),
@@ -308,6 +326,27 @@ struct SettingView: View {
                 }
             }
     }
+    
+    func updateAlarmPermissionInDatabase(isEnabled: Bool) {
+            let url = "http://211.188.54.174:1337/alarms/\(id)"
+            let parameters: [String: Any] = [
+                "alarmPermission": isEnabled
+            ]
+            
+            AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default)
+                .validate()
+                .response { response in
+                    switch response.result {
+                    case .success:
+                        print("비 알림 상태 업데이트 완료.")
+                    case .failure(let error):
+                        print("비 알림 상태 업데이트 실패: \(error)")
+                        if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                            print("서버 응답: \(errorMessage)")
+                        }
+                    }
+                }
+        }
 }
 
 struct SettingView_Previews: PreviewProvider {
