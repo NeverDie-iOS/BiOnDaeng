@@ -122,7 +122,7 @@ struct DetailMainView: View {
                 .background(Color(hex: "00B1FF"))
                 .clipShape(RoundedRectangle(cornerRadius: 27))
                 .overlay(RoundedRectangle(cornerRadius: 27)
-                    .stroke(Color(hex: "FFFFF")!, lineWidth: 1)
+                    .stroke(Color(hex: "01B2FF")!, lineWidth: 1)
                 )
                 .padding(.top, 16)
                 
