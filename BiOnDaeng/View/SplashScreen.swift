@@ -33,13 +33,12 @@ struct LottieView: UIViewRepresentable {
         let view = UIView()
         let animationView = LottieAnimationView(name: fileName)
         animationView.loopMode = loopMode
-        animationView.contentMode = .scaleToFill // 변경된 부분
+        animationView.contentMode = .scaleToFill
         animationView.play()
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
 
-        // Constraints를 수정하여 애니메이션이 전체 화면을 차지하도록 설정
         NSLayoutConstraint.activate([
             animationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             animationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -51,6 +50,6 @@ struct LottieView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        // 필요 시 업데이트 로직을 추가할 수 있음
+        
     }
 }
