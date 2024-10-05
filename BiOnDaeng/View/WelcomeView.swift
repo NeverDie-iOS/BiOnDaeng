@@ -63,7 +63,7 @@ struct WelcomeView: View {
                             .foregroundColor(Color.black)
                             .padding(.top, 12)
                         
-                        Text("알람 설정")
+                        Text("알림 설정")
                             .foregroundStyle(Color.black)
                             .font(.pretendardSemiBold(size: 20))
                         
