@@ -36,21 +36,23 @@ struct SettingView: View {
                 .padding(.trailing, 12)
                 .sheet(isPresented: $showAlarmSheet) {
                     VStack {
-                        Image(systemName: "alarm.fill")
+                        Image("Alarm")
                             .resizable()
                             .frame(width: 27.0, height: 27.0)
                             .foregroundColor(Color.black)
                             .padding(.top, 12)
                         
-                        Text("알람 설정")
+                        Text("알림 설정")
                             .foregroundStyle(Color.black)
                             .font(.pretendardSemiBold(size: 20))
-                            .padding(.top, 7)
                         
-                        Text("비비가 시간에 맞춰 알려드릴게요!")
+                        Text("☔️앞으로 6시간 안에 비가 오면☔️\n비비가 선택한 시간에 알려드릴게요🐶🐾")
                             .foregroundStyle(Color(hex: "A5A5A5")!)
-                            .font(.pretendardSemiBold(size: 13))
-                            .padding(.top, 15)
+                            .font(.pretendardSemiBold(size: 15))
+                            .padding(.top, 4)
+                            .multilineTextAlignment(.center)
+                            .lineSpacing(8)
+                            .kerning(1)
                         
                         DatePicker("알람 시간", selection: $tempSelectedTime, displayedComponents: .hourAndMinute)
                             .datePickerStyle(.wheel)
@@ -61,7 +63,7 @@ struct SettingView: View {
                         
                         HStack(spacing: 21) {
                             Button(action: {
-                                showLocationSheet = false
+                                showAlarmSheet = false
                             }) {
                                 Text("취소")
                                     .foregroundStyle(.black)
@@ -88,9 +90,11 @@ struct SettingView: View {
                             }) {
                                 Text("선택완료")
                                     .foregroundStyle(.white)
+                                    .font(.pretendardSemiBold(size: 18))
+                                    .frame(maxWidth: .infinity)
                             }
                             .frame(width: 160, height: 50)
-                            .background(Color(hex: "4B81C2"))
+                            .background(Color(hex: "006FC2"))
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
