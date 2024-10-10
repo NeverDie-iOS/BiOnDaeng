@@ -7,7 +7,7 @@ struct MainThemeView: View {
     @State private var isFirstAppear = true
     
     var body: some View {
-        let mainImage = (weatherShort.pty.isEmpty || (weatherShort.pty[0] != "1" && weatherShort.pty[0] != "4")) ? "MainTheme_Sunny" : "MainTheme"
+        let mainImage = (weatherNow.precipitationType.isEmpty || weatherNow.precipitationType == "0" || weatherNow.precipitationType == "3" || weatherNow.precipitationType == "7") ? "MainTheme_Sunny" : "MainTheme"
         
         Image(mainImage)
             .resizable()
@@ -21,14 +21,14 @@ struct MainThemeView: View {
                         
                         let maxTemp = weatherShort.tmx.isEmpty ? "" : String(Int(Double(weatherShort.tmx)!))
                         let minTemp = weatherShort.tmn.isEmpty ? "" : String(Int(Double(weatherShort.tmn)!))
-                        let precipitationDesc = weatherShort.pty.isEmpty ? "" : getPrecipitationDescription(pty: weatherShort.pty[0]).0
+                        let precipitationDesc = weatherNow.precipitationType.isEmpty ? "" : getPrecipitationDescription(pty: weatherNow.precipitationType).0
                         
                         Text("\(maxTemp)°/\(minTemp)°/\(precipitationDesc)")
                                                     .font(.pretendardExtraLight(size: 9.5))
                                                     .foregroundStyle(Color(hex: "FBFCFE")!)
                                                     .offset(x: 45, y: 11)
                         
-                        Image("\(weatherShort.pty.isEmpty ? "Sunny" : getPrecipitationDescription(pty: weatherShort.pty[0]).1)")
+                        Image("\(weatherNow.precipitationType.isEmpty ? "Sunny" : getPrecipitationDescription(pty: weatherNow.precipitationType).1)")
                             .resizable()
                             .frame(width: 23, height: 23)
                             .offset(x: 63, y: -6)
@@ -66,11 +66,15 @@ struct MainThemeView: View {
             case "1":
                 return ("비", "Rainy")
             case "2":
-                return ("비/눈", "SnowyAndRainy")
+                return ("비ㆍ눈", "SnowyAndRainy")
             case "3":
                 return ("눈", "Snowy")
-            case "4":
-                return ("소나기", "Shower")
+            case "5":
+                return ("빗방울", "Rainfall")
+            case "6":
+                return ("빗방울눈날림", "SnowyAndRainy")
+            case "7":
+                return ("눈날림", "Snowy")
             default:
                 return ("-", "-")
         }
