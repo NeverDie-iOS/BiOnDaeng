@@ -69,6 +69,14 @@ struct MainView: View {
                         
                         Spacer()
                         
+                        Button(action: {}) {
+                            Image("Share")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .scaledToFit()
+                        }
+                        .padding(.trailing, 6)
+                        
                         NavigationLink(destination: SettingView()) {
                             Image("Setting")
                                 .resizable()
