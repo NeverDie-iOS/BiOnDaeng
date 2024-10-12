@@ -39,7 +39,7 @@ struct LocationSearchView: View {
                     .padding(.vertical, 6)
                 
                 TextField("지역(구/동)을 입력하세요.", text: $searchText)
-                    .font(.pretendardMedium(size: 10))
+                    .font(.pretendardMedium(size: 15))
                 
                 Spacer()
                 
