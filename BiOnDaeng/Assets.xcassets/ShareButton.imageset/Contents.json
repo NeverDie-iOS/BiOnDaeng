@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "KakaoShareButton.png",
+      "filename" : "ShareButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "KakaoShareButton@2x.png",
+      "filename" : "ShareButton@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "KakaoShareButton@3x.png",
+      "filename" : "ShareButton@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

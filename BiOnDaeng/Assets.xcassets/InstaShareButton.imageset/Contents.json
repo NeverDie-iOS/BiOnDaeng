@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "KakaoShareButton.png",
+      "filename" : "InstaShareButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "KakaoShareButton@2x.png",
+      "filename" : "InstaShareButton@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "KakaoShareButton@3x.png",
+      "filename" : "InstaShareButton@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
