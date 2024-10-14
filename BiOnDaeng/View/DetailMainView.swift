@@ -104,7 +104,7 @@ struct DetailMainView: View {
     
     private var weatherDetailView: some View {
         
-        let mainImage = (weatherShort.pty.isEmpty || (weatherShort.pty[0] != "1" && weatherShort.pty[0] != "4")) ? "DetailViewTheme_Sunny" : "DetailViewTheme"
+        let mainImage = (weatherNow.precipitationType.isEmpty || weatherNow.precipitationType == "0" || weatherNow.precipitationType == "3" || weatherNow.precipitationType == "7") ? "DetailViewTheme_Sunny" : "DetailViewTheme"
         
         return ZStack(alignment: .top) {
             Image(mainImage)
