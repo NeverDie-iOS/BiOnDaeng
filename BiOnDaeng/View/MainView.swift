@@ -8,6 +8,8 @@ struct MainView: View {
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var selectedTab = 0
     @State private var showAlert = false // 네트워크 연결 불안정
+    @State private var showShareView = false
+    @StateObject private var weatherNow = NowModel()
     
     var body: some View {
         NavigationView {
@@ -69,7 +71,10 @@ struct MainView: View {
                         
                         Spacer()
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            weatherNow.fetchWeather()
+                            showShareView.toggle()
+                        }) {
                             Image("Share")
                                 .resizable()
                                 .frame(width: 24, height: 24)
@@ -110,6 +115,13 @@ struct MainView: View {
                 .padding(.top, 27)
             }
         }
+        .overlay(
+                    Group {
+                        if showShareView {
+                            ShareView(showShareView: $showShareView, myLocation: myLocation, rainfall: weatherNow.rainfall, precipitationType: weatherNow.precipitationType)
+                                        }
+                    }
+                )
     }
 }
 
