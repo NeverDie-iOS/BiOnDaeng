@@ -1,0 +1,6 @@
+framework module Pods_BiOnDaeng {
+  umbrella header "Pods-BiOnDaeng-umbrella.h"
+
+  export *
+  module * { export * }
+}
