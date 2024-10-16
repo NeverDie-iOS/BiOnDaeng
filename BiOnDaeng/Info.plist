@@ -16,6 +16,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaolink</string>
+		<string>instagram-stories</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
