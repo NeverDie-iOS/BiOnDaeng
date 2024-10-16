@@ -1,4 +1,7 @@
 import SwiftUI
+import SafariServices
+import KakaoSDKCommon
+import KakaoSDKShare
 
 struct ShareView: View {
     @Binding var showShareView: Bool
@@ -18,7 +21,9 @@ struct ShareView: View {
                 ShareImageView(myLocation: myLocation, rainfall: rainfall, precipitationType: precipitationType)
                 
                 HStack {
-                    Button(action: {}) {
+                    Button(action: {
+                        shareToKakao()
+                    }) {
                         Image("KakaoShareButton")
                             .resizable()
                             .frame(width: 56, height: 56)
@@ -57,6 +62,67 @@ struct ShareView: View {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController {
             rootViewController.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func shareToKakao() {
+        guard let imageToShare = ShareImageView(myLocation: myLocation, rainfall: rainfall, precipitationType: precipitationType).getImage() else {
+            print("Failed to get image.")
+            return
+        }
+        
+        ShareApi.shared.imageUpload(image: imageToShare) { (imageUploadResult, error) in
+            if let error = error {
+                print("Error uploading image: \(error)")
+                return
+            }
+            
+            guard let uploadedImageURL = imageUploadResult?.infos.original.url else {
+                print("Failed to get uploaded image URL.")
+                return
+            }
+            
+            let feedTemplateJsonStringData =
+            """
+            {
+                "object_type": "feed",
+                "content": {
+                    "title": "오늘의 날씨는~?",
+                    "description": "#외출 전 비가 오면 알려주는 댕댕이",
+                    "image_url": "\(uploadedImageURL)",
+                    "link": {
+                        "mobile_web_url": "https://apps.apple.com/us/app/%EB%B9%84%EC%98%A8%EB%8C%95/id6736566563",
+                        "web_url": "https://apps.apple.com/us/app/%EB%B9%84%EC%98%A8%EB%8C%95/id6736566563"
+                    }
+                },
+                "buttons": [
+                    {
+                        "title": "앱으로 보기",
+                        "link": {
+                            "ios_execution_params": "key1=value1&key2=value2"
+                        }
+                    }
+                ]
+            }
+            """.data(using: .utf8)!
+            
+            guard let templatable = try? JSONSerialization.jsonObject(with: feedTemplateJsonStringData, options: []) as? [String: Any] else {
+                print("Failed to decode feed template")
+                return
+            }
+
+            if ShareApi.isKakaoTalkSharingAvailable() {
+                ShareApi.shared.shareDefault(templateObject: templatable) { sharingResult, error in
+                    if let error = error {
+                        print("Error: \(error)")
+                    } else {
+                        print("shareDefault() success.")
+                        if let sharingResult = sharingResult {
+                            UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -143,7 +209,7 @@ struct ShareImageView: View {
             ]
             
             let timeText = currentTime()
-            let locationText = "\(myLocation)은"
+            let locationText = "\(myLocation)"
             let message = mainImage == "ShareBackground_Sunny" ? "맑댕" : "\(rainfall) 비온댕"
             
             timeText.draw(at: CGPoint(x: 19, y: 10), withAttributes: timeAttributes)
@@ -152,6 +218,15 @@ struct ShareImageView: View {
         }
     }
     
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+    func updateUIViewController(_ uiViewController: SFSafariViewController,
+        context: Context) {}
 }
 
 struct Previews: PreviewProvider {
