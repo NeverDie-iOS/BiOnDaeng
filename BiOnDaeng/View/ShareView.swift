@@ -113,6 +113,9 @@ struct ShareImageView: View {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 300))
         return renderer.image { context in
             
+            context.cgContext.setFillColor(UIColor.black.cgColor)
+            context.cgContext.fill(CGRect(x: 0, y: 0, width: 300, height: 300))
+            
             let mainImage = (precipitationType.isEmpty || precipitationType == "0" || precipitationType == "3" || precipitationType == "7") ? "ShareBackground_Sunny" : "ShareBackground"
             
             if let background = UIImage(named: mainImage)?.cgImage {
@@ -127,12 +130,12 @@ struct ShareImageView: View {
                 .font: UIFont(name: "Pretendard-ExtraLight", size: 12) ?? UIFont.systemFont(ofSize: 12),
                 .foregroundColor: UIColor.white.withAlphaComponent(0.5)
             ]
-
+            
             let locationAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont(name: "Pretendard-ExtraLight", size: 15) ?? UIFont.systemFont(ofSize: 15),
                 .foregroundColor: UIColor.white.withAlphaComponent(0.5)
             ]
-
+            
             
             let messageAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont(name: "Pretendard-Light", size: 28) ?? UIFont.systemFont(ofSize: 28),
