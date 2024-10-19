@@ -32,7 +32,7 @@ class CctvViewModel: ObservableObject {
         let minY = lat - 1
         let maxY = lat + 1
         
-        let apiKey = "7165774b4e5f405fadab11205c40be1e"
+        let apiKey = Bundle.main.cctvKey
         let apiUrl = "https://openapi.its.go.kr:9443/cctvInfo?apiKey=\(apiKey)&type=ex&cctvType=2&minX=\(minX)&maxX=\(maxX)&minY=\(minY)&maxY=\(maxY)&getType=json"
         
         AF.request(apiUrl).validate().responseDecodable(of: CCTVResponse.self) { [weak self] response in
