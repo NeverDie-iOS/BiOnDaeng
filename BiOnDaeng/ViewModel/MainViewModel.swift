@@ -59,7 +59,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private func reverseGeocodeLocation(location: CLLocation) {
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
-        let apiKey = Bundle.main.kakaoAppKey
+        let apiKey = Bundle.main.kakaoRestAPIKey
         let urlString = "https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=\(longitude)&y=\(latitude)"
 
         AF.request(urlString, headers: ["Authorization": "KakaoAK \(apiKey)"]).responseDecodable(of: KakaoGeocodingResponse.self) { response in

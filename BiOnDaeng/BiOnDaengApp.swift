@@ -92,4 +92,11 @@ extension Bundle {
         guard let key = resource["cctvKey"] as? String else { fatalError("키값 에러")}
         return key
     }
+    
+    var kakaoRestAPIKey: String {
+        guard let file = self.path(forResource: "Property List", ofType: "plist") else { fatalError("Property List.plist 파일이 없습니다.") }
+        guard let resource = NSDictionary(contentsOfFile: file) else { fatalError("파일 형식 에러") }
+        guard let key = resource["kakaoRestAPIKey"] as? String else { fatalError("키값 에러")}
+        return key
+    }
 }
