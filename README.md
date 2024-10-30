@@ -1,3 +1,7 @@
+[![Swift 6.0](https://img.shields.io/badge/swift-6.0-ED523F.svg?style=flat)](https://swift.org/download/) [![Xcode 16.0](https://img.shields.io/badge/Xcode-16.0-ED523F.svg?style=flat&color=blue)](https://swift.org/download/) [![Platform iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat)](https://developer.apple.com/ios/) [![Email](https://img.shields.io/badge/contact-mm083434%40naver.com-03C75A)](mailto:mm083434@naver.com)
+
+<img src="https://github.com/user-attachments/assets/f8ab4ffb-cd71-4933-a39c-aeeba7fbd392" width="300" />
+
 | Emoji | Description | 
 |------|---|
 | 🎨 | asset 이미지, 폰트 등 필요한 파일 추가 |
