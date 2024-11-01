@@ -117,7 +117,7 @@
 
 > ⚙️ 설정 화면
 
-    - '알림 시간 지정 / 알림 허용 / 지역'을 설정할 수 있어요.
+    - '알림 시간 / 알림 허용 / 지역'을 설정할 수 있어요.
 
 ![setting](https://github.com/user-attachments/assets/238ee861-7cf4-46dc-af92-ea70f947ce39)
 
