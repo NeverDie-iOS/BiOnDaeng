@@ -19,11 +19,11 @@ struct MainThemeView: View {
                             .font(.pretendardMedium(size: 45))
                             .foregroundStyle(Color(hex: "FFFFFF")!)
                         
-                        let maxTemp = weatherShort.tmx.isEmpty ? "" : String(Int(Double(weatherShort.tmx)!))
                         let minTemp = weatherShort.tmn.isEmpty ? "" : String(Int(Double(weatherShort.tmn)!))
+                        let maxTemp = weatherShort.tmx.isEmpty ? "" : String(Int(Double(weatherShort.tmx)!))
                         let precipitationDesc = weatherNow.precipitationType.isEmpty ? "" : getPrecipitationDescription(pty: weatherNow.precipitationType).0
                         
-                        Text("\(maxTemp)°/\(minTemp)°/\(precipitationDesc)")
+                        Text("\(minTemp)°/\(maxTemp)°/\(precipitationDesc)")
                                                     .font(.pretendardExtraLight(size: 9.5))
                                                     .foregroundStyle(Color(hex: "FBFCFE")!)
                                                     .offset(x: 45, y: 11)

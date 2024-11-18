@@ -18,7 +18,7 @@ class ShortTermModel: ObservableObject {
         
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         let baseDate = dateFormatter.string(from: yesterday!)
-        let baseTime = "2300"
+        let baseTime = "2000"
         
         let parameters: [String: Any] = [
             "authKey": Bundle.main.gisangAuth,
