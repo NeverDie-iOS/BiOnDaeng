@@ -7,7 +7,7 @@
 ![비온댕](https://github.com/user-attachments/assets/b1023800-3819-499c-b84d-e8df1ff17de0)
 
 &nbsp;
-## Download App <br> <a href="https://apps.apple.com/us/app/%EB%B9%84%EC%98%A8%EB%8C%95/id6736566563" style="vertical-align: -5px;"><img src="https://img.shields.io/badge/App Store-0D96F6?style=for-the-badge&logo=App%20Store&logoColor=white" alt="Download on the App Store"></a>
+## Download App <br> <a href="https://apps.apple.com/kr/app/%EB%B9%84%EC%98%A8%EB%8C%95/id6736566563" style="vertical-align: -5px;"><img src="https://img.shields.io/badge/App Store-0D96F6?style=for-the-badge&logo=App%20Store&logoColor=white" alt="Download on the App Store"></a>
 
 
 <img src="https://github.com/user-attachments/assets/ca5478a1-e27d-4a80-bf38-05806f43e84f" alt="QR Code" width="200">
