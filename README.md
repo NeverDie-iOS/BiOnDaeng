@@ -7,17 +7,11 @@
 ![비온댕](https://github.com/user-attachments/assets/b1023800-3819-499c-b84d-e8df1ff17de0)
 
 &nbsp;
-## Download App <br> <a href="https://apps.apple.com/kr/app/%EB%B9%84%EC%98%A8%EB%8C%95/id6736566563" style="vertical-align: -5px;"><img src="https://img.shields.io/badge/App Store-0D96F6?style=for-the-badge&logo=App%20Store&logoColor=white" alt="Download on the App Store"></a>
-
-
-<img src="https://github.com/user-attachments/assets/ca5478a1-e27d-4a80-bf38-05806f43e84f" alt="QR Code" width="200">
-
-&nbsp;
 ## 🌧️ 프로젝트 소개
 
 `비온댕`은 강수 알림 서비스를 제공하는 iOS 애플리케이션입니다.
 
-비 소식이 있는 날에 강아지가 알림을 보내, 외출 전 우산을 챙길 수 있도록 도와줍니다.🐶
+비 소식이 있는 날에 강아지가 알림을 보내, 외출 전 우산을 챙길 수 있도록 도와줍니다.
 
 &nbsp;
 ## ✨ 주요 기능
@@ -40,8 +34,6 @@
 - `카카오톡`/`인스타그램` 등 SNS를 통한 날씨 정보 공유
 - iPhone 기본 공유(Share Extension)
 - 실시간 날씨 상태 공유
-
-> "비온댕과 함께라면, 비 오는 날도 걱정 없어!" 🌧️🐶
 
 &nbsp;
 ## ☔️ 앱 실행 화면
@@ -175,8 +167,10 @@
 ### 📱 Push Notification
 - Firebase Cloud Messaging (FCM)
 
-### 👩🏻‍🎨 Designer
-- 유가경_전남대학교 디자인학과 3학년
+&nbsp;
+### 👨🏻‍💻👩🏻‍🎨 Team
+- NeverDie-iOS(Me)_ 기획 / iOS 개발 / 백엔드 개발 
+- 유가경_전남대학교 디자인학과 3학년_ 디자인
 
 &nbsp;
 ## Releases <br>
@@ -204,38 +198,3 @@
 | 💩 | 간단한 코드 변경 및 잡일 |
 | ⚡️ | 기능 추가 / 뷰 구성 완료
 | 🔧 | 버그 fix
-
-
-
-<br>
-
-<개인정보 처리 방침>
-
-본 개인정보 처리 방침은 [비온댕] (이하 “본 앱”)이 사용자로부터 개인정보를 수집, 사용, 저장하지 않음을 설명합니다.
-1. 개인정보 수집
-
-본 앱은 사용자로부터 어떠한 개인정보도 수집하지 않습니다.
-
-2. 개인정보 사용
-
-본 앱은 사용자의 개인정보를 사용하지 않습니다.
-
-3. 제3자 제공
-
-본 앱은 개인정보를 제3자에게 제공하지 않습니다.
-
-4. 개인정보 보호
-
-본 앱은 개인정보를 수집하지 않으므로, 별도의 개인정보 보호 조치는 필요하지 않습니다.
-
-5. 사용자의 권리
-
-본 앱은 개인정보를 수집하지 않으므로, 사용자는 개인정보에 대한 접근, 수정, 삭제 요청을 할 필요가 없습니다.
-
-6. 변경 사항
-
-본 방침이 변경될 경우, 앱 내 공지로 알려드릴 것입니다.
-
-7. 연락처
-   
-본 앱에 대한 문의는 [mm083434@naver.com]로 연락 주시기 바랍니다.
